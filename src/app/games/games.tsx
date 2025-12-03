@@ -1,6 +1,6 @@
 "use client";
 import GameCard from "@/Components/UI/GameCard/GameCard";
-import { useEffect, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 import SelectComp, { OptionsProps } from "@/Components/UI/Select";
 import { FaSearch } from "react-icons/fa";
 import { GameCategoryType, GamesProps, GameType } from "@/Types/games";
@@ -26,24 +26,35 @@ export default function Games({
 	);
 
 	// optimize type from any to ...
-	const [categoryObject, setCategoryObject] = useState<"notLoaded" | any>("notLoaded")
+	const [categoryObject, setCategoryObject] = useState<"notLoaded" | any>(
+		"notLoaded",
+	);
 
 	const rate_list: rateNumberRange[] = ["1", "2", "3", "4"];
 
-	const BACKEND_URL = process.env.BACKEND_URL
+	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-	const {mutate: mutateCategory} = useMutation({
+	const {
+		data,
+		mutate: mutateGames,
+		isPending,
+	} = useMutation({
 		mutationFn: () => {
-			return  axios.get(`${BACKEND_URL}/api/games`, {
-				params: {
-					rate: rate,
-					category: category,
-					// name: 
-				}
-			}).then(res => console.log(res)).catch(err => console.log('error:', err)) 
-
-		}
-	})
+			return axios
+				.get(`${BACKEND_URL}/api/games`, {
+					params: {
+						...(rate && { rate: rate }),
+						...(category && { category: category }),
+						// name:
+					},
+				})
+				.then((res) => {
+					console.log("res:", res);
+					return res.data;
+				})
+				.catch((err) => console.log("error:", err));
+		},
+	});
 
 	useEffect(() => {
 		const rateParam = searchParams.get("rate");
@@ -67,6 +78,7 @@ export default function Games({
 	useEffect(() => {
 		const rateParam = searchParams.get("rate");
 		if ((rate != rateParam && rate != "notLoaded") || rate != "") {
+			mutateGames();
 		}
 	}, [rate]);
 
@@ -76,30 +88,30 @@ export default function Games({
 			(category != categoryParam && category != "notLoaded") ||
 			category != ""
 		) {
-			mutateCategory()
+			// bug change url
+			mutateGames();
 		}
 	}, [category]);
 
 	useEffect(() => {
-	  console.log('rate changed:', rate)
-	}, [rate])
-	
+		if (categories) {
+			setCategoryObject(() => {
+				let changedCategory: OptionsProps[] = new Array();
+
+				for (let index = 0; index < categories.length; index++) {
+					const element = categories[index];
+					changedCategory.push({ text: element, value: element });
+				}
+
+				return changedCategory;
+			});
+		}
+	}, [categories]);
 
 	useEffect(() => {
-	  if(categories) {
-		setCategoryObject(() => {
-		let changedCategory: OptionsProps[] = new Array;
-		
-		for (let index = 0; index < categories.length; index++) {
-			const element = categories[index];
-			changedCategory.push({text: element, value: element})
-		}
-
-		return changedCategory
-	  })
-	  }
-	}, [categories])
-	
+		console.log("data is", data);
+		console.log(Array.isArray(data) && data.length > 0);
+	}, [data]);
 
 	return (
 		<>
@@ -116,44 +128,81 @@ export default function Games({
 				</div>
 				<div className="mt-2 flex w-full justify-between md:mt-0 md:w-fit">
 					<div className="mr-4 w-full md:w-32">
-						{categoryObject != 'notLoaded' && <SelectComp
-							value={category}
-							label="Category"
-							Options={categoryObject}
-							onChange={(e) => setCategory(e.target.value)}
-						/>}
+						{categoryObject != "notLoaded" && (
+							<SelectComp
+								value={category}
+								label="Category"
+								Options={categoryObject}
+								onChange={(e) => setCategory(e.target.value)}
+							/>
+						)}
 					</div>
 
 					<div className="w-full md:w-32">
-						{rate != 'notLoaded' && <SelectComp
-							label="Rate"
-							value={rate}
-							Options={[
-								{
-									text: "Rate > 1",
-									value: 1,
-								},
-								{
-									text: "Rate > 2",
-									value: 2,
-								},
-								{
-									text: "Rate > 3",
-									value: 3,
-								},
-								{
-									text: "Rate > 4",
-									value: 4,
-								},
-							]}
-							onChange={(e) => setRate(e.target.value)}
-						/>}
+						{rate != "notLoaded" && (
+							<SelectComp
+								label="Rate"
+								value={rate}
+								Options={[
+									{
+										text: "Rate > 1",
+										value: 1,
+									},
+									{
+										text: "Rate > 2",
+										value: 2,
+									},
+									{
+										text: "Rate > 3",
+										value: 3,
+									},
+									{
+										text: "Rate > 4",
+										value: 4,
+									},
+								]}
+								onChange={(e) => setRate(e.target.value)}
+							/>
+						)}
 					</div>
 				</div>
 			</div>
-			{Array.isArray(games) && games.length > 0 ? (
-				<div className="flex w-full flex-wrap justify-around">
-					{games.map((game: GameType) => (
+			{/* {Array.isArray(games) && games.length > 0 ? ( */}
+			<div className="flex w-full flex-wrap justify-around">
+				{isPending ? (
+					<h1>loading</h1>
+				) : Array.isArray(data) && data.length > 0 ? (
+					data.map((game: GameType) => (
+						<GameCard
+							key={game.id}
+							Id={game.id}
+							Name={game.name}
+							ImageSrc={`/assets/${game.id}.png`}
+							Rate={game.rate}
+							Price={game.price}
+							Category={game.category}
+						/>
+					))
+				) : // <h1>ffffffffffff</h1>
+				Array.isArray(data) && data.length == 0 ? (
+					<NoGameFound />
+				) : Array.isArray(games) && games.length > 0 ? (
+					games.map((game: GameType) => (
+						<GameCard
+							key={game.id}
+							Id={game.id}
+							Name={game.name}
+							ImageSrc={`/assets/${game.id}.png`}
+							Rate={game.rate}
+							Price={game.price}
+							Category={game.category}
+						/>
+					))
+				) : (
+					Array.isArray(games) && games.length == 0 && <NoGameFound />
+				)}
+
+				{/* {games.map((game: GameType) => (
 						<GameCard
 						key={game.id}
 							Id={game.id}
@@ -163,14 +212,21 @@ export default function Games({
 							Price={game.price}
 							Category={game.category}
 						/>
-					))}
-				</div>
-			) : (
-				// fix style and height
-				<div className="flex w-full flex-grow items-center justify-center text-white">
-					<Typography variant="h1">No game found</Typography>
-				</div>
-			)}
+					))} */}
+			</div>
+			{/* ) : (
+				<NoGameFound />
+			)} */}
 		</>
 	);
 }
+
+export const NoGameFound = (): ReactElement => {
+	return (
+		// fix style and height
+
+		<div className="flex w-full flex-grow items-center justify-center text-white">
+			<Typography variant="h1">No game found</Typography>
+		</div>
+	);
+};
