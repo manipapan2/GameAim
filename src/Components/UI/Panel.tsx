@@ -34,10 +34,10 @@ export default function Panel() {
 			}}
 		>
 			<div
-				className="hidden items-center pb-4 transition-all lg:flex"
+				className="hidden items-center pb-4  transition-all lg:flex"
 				style={{
-					paddingRight: isPanelOpen ? "12px" : "0",
-					paddingLeft: isPanelOpen ? "12px" : "0",
+					// paddingRight: isPanelOpen ? "12px" : "0",
+					// paddingLeft: isPanelOpen ? "12px" : "0",
 				}}
 			>
 				<div className="flex h-[50px]">
@@ -51,15 +51,14 @@ export default function Panel() {
 					<Typography
 						variant="h3"
 						sx={{
-							marginRight: isPanelOpen ? "16px" : "0",
-							fontSize: isPanelOpen ? "2rem" : "0",
+							fontSize: isPanelOpen ? "1.5rem" : "0",
 							display: "flex",
 							alignItems: "center",
 							color: "white",
 							transition: "font-size 150ms",
 						}}
 					>
-						Unity
+						GameAim
 					</Typography>
 				</div>
 				<IconButton
@@ -69,7 +68,7 @@ export default function Panel() {
 						margin: "auto",
 						alignItems: "center",
 						justifyContent: "center",
-						padding: "0.75rem",
+						padding: "0.5rem",
 					}}
 				>
 					{isPanelOpen ? (
