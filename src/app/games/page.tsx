@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 async function getGames(params: any) {
 	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 	let requestURL: string = `${BACKEND_URL}/api/games?`;
-	const name: string = params.searchParams?.name;
+	const searchName: string = params.searchParams?.searchName;
 	const category: string = params.searchParams?.category;
 	const rate: string = params.searchParams?.rate;
 
-	if (params.searchParams?.name) {
-		requestURL += `name=${name}&`;
+	if (params.searchParams?.searchName) {
+		requestURL += `search_name=${searchName}&`;
 	}
 	if (params.searchParams?.category) {
 		requestURL += `category=${category}&`;

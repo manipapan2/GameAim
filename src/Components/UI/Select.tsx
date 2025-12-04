@@ -9,7 +9,7 @@ interface SelectProps {
 
 export interface OptionsProps {
 	text: string;
-	value: string | number;
+	value: string | number | "";
 }
 
 export default function SelectComp({
@@ -52,7 +52,7 @@ export default function SelectComp({
 						},
 					}}
 				>
-					<MenuItem value="">
+					<MenuItem value={""}>
 						<em>All</em>
 					</MenuItem>
 					{Options.map((option: OptionsProps) => (
