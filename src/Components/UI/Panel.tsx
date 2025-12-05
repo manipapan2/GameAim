@@ -28,7 +28,7 @@ export default function Panel() {
 	return (
 		<nav
 			// bug - fix overflow-y-auto - cross size is facing a bug
-			className="fixed left-0 top-[100px] z-[-1] flex h-[calc(100%-100px)] w-full flex-col border-b-0 border-l-0 border-r-2 border-t-0 border-solid border-[var(--color-accent)] bg-[var(--color-background)] p-5 pt-8 transition-all md:w-1/3 lg:relative lg:!left-0 lg:top-auto lg:h-full lg:max-w-fit max-w-full overflow-y-auto overflow-hidden"
+			className="fixed left-0 top-[100px] z-2 flex h-[calc(100%-100px)] w-full flex-col border-b-0 border-l-0 border-r-2 border-t-0 border-solid border-[var(--color-accent)] bg-[var(--color-background)] p-5 pt-8 transition-all md:w-1/3 lg:relative lg:!left-0 lg:top-auto lg:h-full lg:max-w-fit max-w-full overflow-y-auto overflow-hidden"
 			style={{
 				left: isPanelOpen ? "0px" : "-100%",
 			}}

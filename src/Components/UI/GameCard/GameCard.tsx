@@ -26,7 +26,7 @@ export default function GameCard({
 	return (
 		<Link
 			href={`/games/${Name}`}
-			className="relative z-10 m-5 flex h-fit w-full flex-col rounded-lg bg-[var(--CardColor)] outline-none outline-[3px] outline-offset-8 outline-transparent transition-all hover:outline-offset-0 hover:outline-white md:h-60 md:w-64"
+			className="relative z-10 m-5 flex h-fit w-full flex-col rounded-lg bg-(--CardColor) outline-3 outline-solid outline-offset-8 outline-transparent transition-all hover:outline-offset-0 hover:outline-white md:h-60 md:w-64"
 		>
 			<div className="relative aspect-video w-full">
 				<Image

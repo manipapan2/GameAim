@@ -8,8 +8,8 @@ import OverwatchImage from '../../../../Public/assets/2841233.png'
 
 export default function GridSection(): ReactElement {
 	return (
-		<div className="grid w-full grid-cols-4 grid-rows-[var(--grid-template-row)] lg:grid-rows-[var(--grid-template-row-lg)]">
-			<div className="col-start-1 col-end-5 row-start-1 row-end-2 mb-4 w-full aspect-[16/3]">
+		<div className="grid w-full grid-cols-4 grid-rows-(--grid-template-row) lg:grid-rows-(--grid-template-row-lg)">
+			<div className="col-start-1 col-end-5 row-start-1 row-end-2 mb-4 w-full aspect-16/3">
 				<div className="group relative h-full w-full cursor-pointer rounded-md">
 					{/* optimize add ::after instead of span */}
 					{/* optimize add skeleton animation for images */}
@@ -20,7 +20,7 @@ export default function GridSection(): ReactElement {
 						width={1600}
 						height={900}
 					/>
-					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black bg-opacity-70 text-xl text-white transition-all group-hover:bg-opacity-60 group-hover:text-2xl">
+					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black/70 text-xl text-white transition-all group-hover:bg-black/60 group-hover:text-2xl">
 						Enjoy
 					</span>
 				</div>
@@ -34,7 +34,7 @@ export default function GridSection(): ReactElement {
 						width={1600}
 						height={900}
 					/>
-					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black bg-opacity-70 text-xl text-white transition-all group-hover:bg-opacity-60 group-hover:text-2xl">
+					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black/70 text-xl text-white transition-all group-hover:bg-black/60 group-hover:text-2xl">
 						Think
 					</span>
 				</div>
@@ -48,7 +48,7 @@ export default function GridSection(): ReactElement {
 						width={1600}
 						height={900}
 					/>
-					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black bg-opacity-70 text-xl text-white transition-all group-hover:bg-opacity-60 group-hover:text-2xl">
+					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black/70 text-xl text-white transition-all group-hover:bg-black/60 group-hover:text-2xl">
 						Play
 					</span>
 				</div>
@@ -62,7 +62,7 @@ export default function GridSection(): ReactElement {
 						width={1600}
 						height={900}
 					/>
-					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black bg-opacity-70 text-xl text-white transition-all group-hover:bg-opacity-60 group-hover:text-2xl">
+					<span className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-md bg-black/70 text-xl text-white transition-all group-hover:bg-black/60 group-hover:text-2xl">
 						Focus
 					</span>
 				</div>

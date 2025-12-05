@@ -201,13 +201,13 @@ export default function Games({
 		
 			<div className="relative z-50 flex w-full flex-col items-center justify-between p-1 md:flex-row">
 				<div className="relative m-2 h-10 w-full flex-1 md:max-w-80">
-					<i className="absolute left-3 top-[50%] translate-y-[-50%] text-[var(--color-primary)]">
+					<i className="absolute left-3 top-[50%] translate-y-[-50%] text-(--color-primary)">
 						<FaSearch size={15} />
 					</i>
 					{/* optimize - make input disabled when page not fully loaded */}
 					<input
 						type="text"
-						className="h-full w-full rounded-md bg-[var(--color-card)] p-3 pl-9 text-white outline-none transition-all focus:outline-[var(--color-primary)]"
+						className="h-full w-full rounded-md bg-(--color-card) p-3 pl-9 text-white outline-none transition-all focus:outline-(--color-primary)"
 						placeholder="Search..."
 						onChange={(e) => setSearchInputValue(e.target.value)}
 						onKeyUp={(e) => setSearchName(e.target.value)}
