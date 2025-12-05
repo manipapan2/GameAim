@@ -5,6 +5,8 @@
 	--breakpoint-ss: 20rem;
 }
 
+@custom-variant hover (&:hover);
+
 @font-face {
   font-family: Roboto; /* set name */
   src: url(../../Public/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf); /* url of the font */
