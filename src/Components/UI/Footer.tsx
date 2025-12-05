@@ -31,22 +31,22 @@ export default function Footer() {
 						<Tooltip
 							title={"Github"}
 						>
-							<SiGithub size={30} className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-[var(--color-primary)]"/>
+							<SiGithub size={30} className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-(--color-primary) active:text-(--color-primary)"/>
 						</Tooltip>
 						<Tooltip
 							title={"Instagram"}
 						>
-							<AiFillInstagram size={30} className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-[var(--color-primary)]"/>
+							<AiFillInstagram size={30} className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-(--color-primary) active:text-(--color-primary)"/>
 						</Tooltip>
 						<Tooltip
 							title={"LinkedIn"}
 						>
-							<FaLinkedin size={30} className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-[var(--color-primary)]"/>
+							<FaLinkedin size={30} className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-(--color-primary) active:text-(--color-primary)"/>
 						</Tooltip>
 						<Tooltip
 							title={"X"}
 						>
-							<FaSquareXTwitter size={30} className="cursor-pointer transition-all text-slate-500 hover:text-[var(--color-primary)]"/>
+							<FaSquareXTwitter size={30} className="cursor-pointer transition-all text-slate-500 hover:text-(--color-primary) active:text-(--color-primary)"/>
 						</Tooltip>
 					</div>
 				</div>
@@ -80,7 +80,7 @@ export default function Footer() {
 						Contact US
 					</Typography>
 					<UnderlineLink href={"tel:+23 2394 239 23"}>
-						<i className="mr-2 text-[var(--color-primary)]">
+						<i className="mr-2 text-(--color-primary)">
 							<FaPhoneAlt size={20} />
 						</i>
 						+23 2394 239 23
@@ -89,13 +89,13 @@ export default function Footer() {
 						href={"mailto:test@gmail.com"}
 						className="mt-5"
 					>
-						<i className="mr-2 text-[var(--color-primary)]">
+						<i className="mr-2 text-(--color-primary)">
 							<MdEmail size={20} />
 						</i>
 						test@gmail.com
 					</UnderlineLink>
 					<UnderlineLink href={"#"} className="mt-5">
-						<i className="mr-2 text-[var(--color-primary)]">
+						<i className="mr-2 text-(--color-primary)">
 							<IoLocationSharp size={20} />
 						</i>
 						Some Address
@@ -127,7 +127,7 @@ const UnderlineLink = ({ children, href, className }: UnderlineLinkProps) => {
 	return (
 		<a
 			href={href}
-			className={`after:contents[''] relative flex w-fit cursor-pointer text-slate-400 transition-all after:absolute after:bottom-[-4px] after:left-0 after:h-[3px] after:w-0 after:bg-[var(--color-primary)] after:transition-all hover:text-white hover:after:w-full ${className}`}
+			className={`after:contents[''] relative flex w-fit cursor-pointer text-slate-400 transition-all after:absolute after:-bottom-1 after:left-0 after:h-[3px] after:w-0 after:bg-(--color-primary) after:transition-all hover:text-white hover:after:w-full active:after:w-full ${className}`}
 		>
 			{children}
 		</a>
