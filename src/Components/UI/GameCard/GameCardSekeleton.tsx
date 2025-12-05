@@ -7,7 +7,7 @@ const GameCardSkeleton: FC = () => {
 				>
 					<div className="aspect-video w-full animate-pulse rounded-tl-lg rounded-tr-lg bg-slate-600" />
 
-					<div className="flex flex-grow w-full flex-col justify-between p-4 pl-2 pr-2">
+					<div className="flex grow w-full flex-col justify-between p-4 pl-2 pr-2">
 						<div className="mt-2 h-4 w-full animate-pulse rounded-xl bg-slate-700" />
 
 						<div className="mt-2 h-4 w-full animate-pulse rounded-xl bg-slate-700" />

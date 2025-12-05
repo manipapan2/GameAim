@@ -10,15 +10,6 @@
   src: url(../../Public/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf); /* url of the font */
 }
 
-/* * {
-	box-sizing: border-box;
-	z-index: 1;
-	border: none;
-	outline: none;
-	margin: 0;
-	padding: 0;
-	font-family: Roboto;
-} */
 
 ::-webkit-scrollbar {
 	width: 6px;
@@ -76,5 +67,13 @@ body {
 
 
 @layer base {
-  
+  * {
+	box-sizing: border-box;
+	z-index: 1;
+	border: none;
+	outline: none;
+	margin: 0;
+	padding: 0;
+	font-family: Roboto;
+}
 }

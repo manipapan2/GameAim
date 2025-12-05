@@ -39,14 +39,14 @@ export default function GameCard({
 				/>
 			</div>
 
-			<div className="flex flex-grow flex-col justify-between rounded-bl-lg rounded-br-lg p-3">
+			<div className="flex grow flex-col justify-between rounded-bl-lg rounded-br-lg p-3">
 				<div className="mb-4 flex justify-between lg:mb-0">
 					<Typography color="white" className="truncate text-lg">
 						{Name}
 					</Typography>
 					<div className="ml-2 flex items-center">
 						<IoIosStar
-							className="mr-[10px] text-xl"
+							className="mr-2.5 text-xl"
 							color="yellow"
 						/>
 						<Typography variant="subtitle1" color="white">

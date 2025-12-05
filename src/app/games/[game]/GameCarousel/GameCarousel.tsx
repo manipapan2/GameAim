@@ -1,15 +1,15 @@
 "use client";
 import { ReactElement } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 interface GameCarouselProps {
-	listOfImages: string[];
+	images: StaticImageData[];
 	onClickEach: (index: number) => any;
 }
 
 const GameCarousel = ({
-	listOfImages,
+	images,
 	onClickEach,
 }: GameCarouselProps): ReactElement => {
 	const [emblaRef] = useEmblaCarousel();
@@ -21,15 +21,16 @@ const GameCarousel = ({
 				ref={emblaRef}
 			>
 				<div className="flex h-full w-full">
-					{Array.isArray(listOfImages) && listOfImages.length > 0
-						? listOfImages.map(
-								(imageName: string, index: number) => (
+					{Array.isArray(images) && images.length > 0
+						? images.map(
+							// Optimize : use unique key
+								(image: StaticImageData, index: number) => (
 									<div
 										onClick={() => onClickEach(index)}
-										key={`${imageName} ${index}`}
+										key={`game crousel key: ${index}`}
 										className="ml-2 mr-2 aspect-video w-[30%] min-w-52 cursor-pointer rounded-md first:ml-0 last:mr-0"
 									>
-										<img src={`/assets/${imageName}.png`} alt="" className="w-full h-full rounded-md" loading="lazy" />
+										<Image src={image} alt="" className="w-full h-full rounded-md" loading="lazy" />
 									</div>
 								),
 							)

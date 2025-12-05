@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import GameCarousel from "./GameCarousel/GameCarousel";
 import FixedGameCarousel from "./FixedGameCarousel/FixedGameCarousel";
 import { GameType } from "@/Types/games";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -12,6 +12,11 @@ import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addGame, removeGame } from "@/Hooks/Redux/cartSlice";
+import ValorantImage from "../../../../Public/assets/412354.png";
+import OverwatchImage from "../../../../Public/assets/2841233.png";
+import MinecraftImage from "../../../../Public/assets/577753.png";
+import HaloImage from "../../../../Public/assets/6464542.png";
+import GtaVImage from "../../../../Public/assets/73453454.png";
 
 const Game = ({ game }: { game: GameType }) => {
 	const [scrollPercentage, setScrollPercentage] = useState<number>(0);
@@ -19,15 +24,17 @@ const Game = ({ game }: { game: GameType }) => {
 	const [isFixedGameCarouselOpen, setIsFixedGameCarouselOpen] =
 		useState<boolean>(false);
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState<number>(0);
-	const [isGameAddedToCart, setIsGameAddedToCart] = useState<boolean>(game.is_added_to_cart ? true : false);
+	const [isGameAddedToCart, setIsGameAddedToCart] = useState<boolean>(
+		game.is_added_to_cart ? true : false,
+	);
 	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 	const dispatch = useDispatch();
-	const mockGameIdArray: string[] = [
-		"412354",
-		"2841233",
-		"577753",
-		"6464542",
-		"73453454",
+	const mockImages: StaticImageData[] = [
+		ValorantImage,
+		OverwatchImage,
+		MinecraftImage,
+		HaloImage,
+		GtaVImage,
 	];
 
 	const notify_add_success = () =>
@@ -46,7 +53,7 @@ const Game = ({ game }: { game: GameType }) => {
 				backgroundColor: "var(--color-primary)",
 				border: "2px solid white",
 			},
-            icon: "🗑️"
+			icon: "🗑️",
 		});
 
 	const notify_error = () =>
@@ -58,10 +65,7 @@ const Game = ({ game }: { game: GameType }) => {
 			},
 		});
 
-	const {
-		isPending: isAddGamePending,
-		mutate: addGameToCart,
-	} = useMutation({
+	const { isPending: isAddGamePending, mutate: addGameToCart } = useMutation({
 		mutationFn: () => {
 			return axios.post(`${BACKEND_URL}/api/games`, { game_id: game.id });
 		},
@@ -73,20 +77,20 @@ const Game = ({ game }: { game: GameType }) => {
 		onError: () => notify_error(),
 	});
 
-	const {
-		isPending: isRemoveGamePending,
-		mutate: removeGameFromCart,
-	} = useMutation({
-		mutationFn: () => {
-			return axios.delete(`${BACKEND_URL}/api/games`, { data: { game_id: game.id } });
-		},
-		onSuccess: () => {
-			setIsGameAddedToCart(false);
-            dispatch(removeGame(game.id));
-			notify_remove_success();
-		},
-		onError: () => notify_error(),
-	});
+	const { isPending: isRemoveGamePending, mutate: removeGameFromCart } =
+		useMutation({
+			mutationFn: () => {
+				return axios.delete(`${BACKEND_URL}/api/games`, {
+					data: { game_id: game.id },
+				});
+			},
+			onSuccess: () => {
+				setIsGameAddedToCart(false);
+				dispatch(removeGame(game.id));
+				notify_remove_success();
+			},
+			onError: () => notify_error(),
+		});
 
 	useEffect(() => {
 		const pageContainer = document.getElementById("single-game-page");
@@ -114,27 +118,24 @@ const Game = ({ game }: { game: GameType }) => {
 	}, []);
 
 	return (
-		<div
-			id="single-game-page"
-			className="rounded-md bg-[var(--color-accent)]"
-		>
+		<div id="single-game-page" className="bg-(--color-accent) rounded-md">
 			<Toaster />
 			<div
-				className="fixed left-0 top-0 z-[100] flex h-full w-full items-center justify-center bg-indigo-600 bg-opacity-10 text-white backdrop-blur-lg transition-all"
+				className="z-100 fixed left-0 top-0 flex h-full w-full items-center justify-center bg-indigo-600/10 text-white backdrop-blur-lg transition-all"
 				style={{
 					opacity: isFixedGameCarouselOpen ? "1" : "0",
 					pointerEvents: isFixedGameCarouselOpen ? "auto" : "none",
 				}}
 			>
 				<FixedGameCarousel
-					listOfImageName={mockGameIdArray}
+					images={mockImages}
 					selectedSlideIndex={selectedSlideIndex}
 					disabled={!isFixedGameCarouselOpen}
 					onClose={() => setIsFixedGameCarouselOpen((prev) => !prev)}
 				/>
 			</div>
 
-			<div className="!pointer-events-none relative aspect-[16/8] w-full overflow-hidden rounded-t-md md:aspect-[16/4]">
+			<div className="pointer-events-none! aspect-16/8 md:aspect-16/4 relative w-full overflow-hidden rounded-t-md">
 				{/* For optimization change scale to background size */}
 				<Image
 					src={`/assets/${game.id}.png`}
@@ -172,21 +173,23 @@ const Game = ({ game }: { game: GameType }) => {
 							isLoading={isAddGamePending || isRemoveGamePending}
 							className={`${isGameAddedToCart && "bg-red-600"}`}
 						>
-							{isGameAddedToCart ? "Game is added to cart" : "Add to cart"}
+							{isGameAddedToCart
+								? "Game is added to cart"
+								: "Add to cart"}
 						</Button>
 					</div>
 				</div>
-				<h2 className="mb-3 mt-4 text-2xl text-[var(--color-primary)]">
+				<h2 className="text-(--color-primary) mb-3 mt-4 text-2xl">
 					Description
 				</h2>
 				<p className="text-white">{game.description}</p>
 
 				<div>
-					<h2 className="mb-3 mt-4 text-2xl text-[var(--color-primary)]">
+					<h2 className="text-(--color-primary) mb-3 mt-4 text-2xl">
 						Images
 					</h2>
 					<GameCarousel
-						listOfImages={mockGameIdArray}
+						images={mockImages}
 						onClickEach={(index: number) => {
 							setSelectedSlideIndex(index);
 							setIsFixedGameCarouselOpen(true);

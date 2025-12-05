@@ -5,6 +5,7 @@ import Fade from "embla-carousel-fade";
 import IconButton from "@mui/material/IconButton";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import Image, { StaticImageData } from "next/image";
 
 const options: EmblaOptionsType = {
 	align: "center",
@@ -13,14 +14,14 @@ const options: EmblaOptionsType = {
 };
 
 interface FixedGameCarouselProps {
-	listOfImageName: string[];
+	images: StaticImageData[];
 	selectedSlideIndex: number;
 	disabled: boolean;
 	onClose: () => void;
 }
 
 const FixedGameCarousel = ({
-	listOfImageName,
+	images,
 	selectedSlideIndex,
 	disabled,
 	onClose,
@@ -85,7 +86,7 @@ const FixedGameCarousel = ({
 				<IoIosArrowForward size={20} />
 			</IconButton>
 
-			<div className="z-[100] flex min-w-full max-w-full" ref={disabled ? null : emblaRef}>
+			<div className="z-100 flex min-w-full max-w-full" ref={disabled ? null : emblaRef}>
 				{/* {
                 Array.from(Array(10).keys()).map((number: number) => (
                     <div className="min-w-[30%] h-[30%] flex justify-center items-center z-[100]">
@@ -94,19 +95,20 @@ const FixedGameCarousel = ({
                 ))
             } */}
 				<div className="flex h-full w-full">
-					{listOfImageName.map((Image: string) => (
+					{/* Optimize : use unique key */}
+					{images.map((image: StaticImageData, index: number) => (
 						<div
-							key={`fixed image key: ${Image}`}
-							className="z-[100] flex h-full min-w-full select-none items-center justify-center"
+							key={`fixed image key: index`}
+							className="z-100 flex h-full min-w-full select-none items-center justify-center"
 							style={{
 								pointerEvents: "none !important" as any,
 							}}
 						>
-							<img
+							<Image
 								onClick={(e) => {
 									e.stopPropagation();
 								}}
-								src={`/assets/${Image}.png`}
+								src={image}
 								alt={``}
 								className="aspect-video min-w-[80%] max-w-[80%] rounded-md lg:min-w-[60%] lg:max-w-[60%]"
 							/>

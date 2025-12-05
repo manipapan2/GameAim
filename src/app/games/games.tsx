@@ -215,7 +215,7 @@ export default function Games({
 					/>
 				</div>
 				<div className="mt-2 flex flex-col ss:flex-row w-full justify-between md:mt-0 md:w-fit">
-					<div className="mr-4 w-full md:w-32">
+					<div className="mr-4 ss:w-[48%] w-full md:w-32">
 						{category != undefined &&
 							categoryObject != undefined && (
 								<SelectComp
@@ -229,7 +229,7 @@ export default function Games({
 							)}
 					</div>
 
-					<div className="w-full md:w-32 mt-6 ss:m-0">
+					<div className="ss:w-[48%] w-full md:w-32 mt-4 ss:m-0">
 						{rate != undefined && (
 							<SelectComp
 								label="Rate"
@@ -260,9 +260,9 @@ export default function Games({
 			</div>
 			{/* {Array.isArray(games) && games.length > 0 ? ( */}
 				{isPending ? (
-					<div className="flex w-full flex-grow items-center justify-center"><Spinner/></div>
+					<div className="flex w-full grow items-center justify-center mt-6 mb-6"><Spinner/></div>
 				) : Array.isArray(data) && data.length > 0 ? (
-					<div className="flex w-full flex-wrap justify-around flex-grow">
+					<div className="flex w-full flex-wrap justify-around grow">
 					{data.map((game: GameType) => (
 						<GameCard
 							key={game.id}
@@ -304,7 +304,7 @@ export const NoGameFound = (): ReactElement => {
 	return (
 		// fix style and height
 
-		<div className="flex w-full flex-grow items-center justify-center text-white">
+		<div className="flex w-full grow items-center justify-center text-white">
 			<Typography variant="h1" sx={{fontSize: "2rem"}}>No game found</Typography>
 		</div>
 	);

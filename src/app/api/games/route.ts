@@ -3,6 +3,11 @@ import { GameType, GameCategoryType, categories } from "@/Types/games";
 import { games } from "../(db)/games";
 import { user } from "../(db)/user";
 
+
+const GetImageRawData = () => {
+	return 'asdasdasd'
+}
+
 export async function GET(req: NextRequest) {
 	const searchParams = req.nextUrl.searchParams;
 	const name = searchParams.get("name");
