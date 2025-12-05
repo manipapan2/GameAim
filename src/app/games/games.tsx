@@ -214,7 +214,7 @@ export default function Games({
 						value={searchInputValue}
 					/>
 				</div>
-				<div className="mt-2 flex w-full justify-between md:mt-0 md:w-fit">
+				<div className="mt-2 flex flex-col ss:flex-row w-full justify-between md:mt-0 md:w-fit">
 					<div className="mr-4 w-full md:w-32">
 						{category != undefined &&
 							categoryObject != undefined && (
@@ -229,7 +229,7 @@ export default function Games({
 							)}
 					</div>
 
-					<div className="w-full md:w-32">
+					<div className="w-full md:w-32 mt-6 ss:m-0">
 						{rate != undefined && (
 							<SelectComp
 								label="Rate"
