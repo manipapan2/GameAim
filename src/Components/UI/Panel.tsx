@@ -12,9 +12,12 @@ import { RootState } from "@/Hooks/Redux/store";
 import { togglePanel, closePanel } from "@/Hooks/Redux/panelSlice";
 import { FaDownload } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
+import { setIsAppInstalled } from "@/Hooks/Redux/appStateSlice";
 
 export default function Panel() {
-	const isAppInstalled = useSelector((state: RootState) => state.appState.isAppInstalled)
+	const isAppInstalled = useSelector(
+		(state: RootState) => state.appState.isAppInstalled,
+	);
 
 	const isPanelOpen = useSelector(
 		(state: RootState) => state.panelState.isPanelOpen,
@@ -27,10 +30,16 @@ export default function Panel() {
 		dispatch(closePanel());
 	}, [pathName]);
 
+	useEffect(() => {
+		if (window.matchMedia("(display-mode: standalone)").matches) {
+			dispatch(setIsAppInstalled(true));
+		}
+	}, []);
+
 	return (
 		<nav
 			// bug - fix overflow-y-auto - cross size is facing a bug
-			className="z-2 border-(--color-accent) bg-(--color-background) fixed left-0 top-[100px] flex h-[calc(100%-100px)] w-full max-w-full flex-col overflow-hidden overflow-y-auto border-b-0 border-l-0 border-r-2 border-t-0 border-solid p-5 pt-8 transition-all md:w-1/3 lg:relative lg:left-0! lg:top-auto lg:h-full lg:max-w-fit"
+			className="z-2 border-(--color-accent) bg-(--color-background) lg:left-0! fixed left-0 top-[100px] flex h-[calc(100%-100px)] w-full max-w-full flex-col overflow-hidden overflow-y-auto border-b-0 border-l-0 border-r-2 border-t-0 border-solid p-5 pt-8 transition-all md:w-1/3 lg:relative lg:top-auto lg:h-full lg:max-w-fit"
 			style={{
 				left: isPanelOpen ? "0px" : "-100%",
 			}}

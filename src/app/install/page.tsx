@@ -8,8 +8,8 @@ import { setIsAppInstalled } from "@/Hooks/Redux/appStateSlice";
 import { useRouter } from "next/navigation";
 
 export default function Download(): ReactElement {
-	const dispatch = useDispatch()
-	const router = useRouter()
+	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const installApp = async () => {
 		if (!installPrompt) {
@@ -17,10 +17,11 @@ export default function Download(): ReactElement {
 		}
 		const result = await installPrompt.prompt();
 		console.log(`Install prompt was: ${result.outcome}`);
-		if(result.outcome == 'accepted') {
-			dispatch(setIsAppInstalled(true))
+		if (result.outcome == "accepted") {
+			dispatch(setIsAppInstalled(true));
+			router.push("/");
 		}
-		router.push('/')
+
 		disableInAppInstallPrompt();
 	};
 
@@ -29,10 +30,14 @@ export default function Download(): ReactElement {
 	}
 	const [installPrompt, setInstallPrompt] = useState<any>(null);
 	useEffect(() => {
-		window.addEventListener("beforeinstallprompt", (event) => {
+		const beforeInstall = (event: Event) => {
 			event.preventDefault();
 			setInstallPrompt(event);
-		});
+		};
+
+		window.addEventListener("beforeinstallprompt", beforeInstall);
+
+		return window.removeEventListener("beforeinstallprompt", beforeInstall);
 	}, []);
 
 	return (
@@ -40,14 +45,18 @@ export default function Download(): ReactElement {
 			{/* <div className=" w-2/3 lg:w-auto lg:h-2/3 bg-red-600 aspect-square m-auto mt-5 mb-5"></div> */}
 			{/* <Button className="mt-5" Icon={<FaDownload />}>Download</Button> */}
 
-			<div className="w-full rounded-sm bg-(--color-accent) p-4">
+			<div className="bg-(--color-accent) w-full rounded-sm p-4">
 				<div className="">
 					<MdDownloadForOffline
 						size={90}
 						className="m-auto text-white"
 					/>
 				</div>
-				<Button className="mt-5" Icon={<FaDownload />} onClick={installApp}>
+				<Button
+					className="mt-5"
+					Icon={<FaDownload />}
+					onClick={installApp}
+				>
 					Install
 				</Button>
 			</div>
