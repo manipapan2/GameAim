@@ -51,7 +51,7 @@ export default function RootLayout({
 									<Panel />
 									<div className="flex h-full z-1 w-full max-w-full flex-col overflow-x-hidden">
 										<Header />
-										<div className="flex h-full w-full max-w-full flex-col overflow-x-hidden p-3">
+										<div className="flex relative h-full w-full max-w-full flex-col overflow-x-hidden p-3">
 											{children}
 											<Footer />
 										</div>

@@ -3,14 +3,24 @@ import Button from "@/Components/UI/Button";
 import { ReactElement, useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa6";
 import { MdDownloadForOffline } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { setIsAppInstalled } from "@/Hooks/Redux/appStateSlice";
+import { useRouter } from "next/navigation";
 
 export default function Download(): ReactElement {
+	const dispatch = useDispatch()
+	const router = useRouter()
+
 	const installApp = async () => {
 		if (!installPrompt) {
 			return;
 		}
 		const result = await installPrompt.prompt();
-		// console.log(`Install prompt was: ${result.outcome}`);
+		console.log(`Install prompt was: ${result.outcome}`);
+		if(result.outcome == 'accepted') {
+			dispatch(setIsAppInstalled(true))
+		}
+		router.push('/')
 		disableInAppInstallPrompt();
 	};
 
@@ -30,7 +40,7 @@ export default function Download(): ReactElement {
 			{/* <div className=" w-2/3 lg:w-auto lg:h-2/3 bg-red-600 aspect-square m-auto mt-5 mb-5"></div> */}
 			{/* <Button className="mt-5" Icon={<FaDownload />}>Download</Button> */}
 
-			<div className="w-full rounded-sm bg-[var(--color-accent)] p-4">
+			<div className="w-full rounded-sm bg-(--color-accent) p-4">
 				<div className="">
 					<MdDownloadForOffline
 						size={90}

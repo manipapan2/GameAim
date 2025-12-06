@@ -14,6 +14,8 @@ import { FaDownload } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
 
 export default function Panel() {
+	const isAppInstalled = useSelector((state: RootState) => state.appState.isAppInstalled)
+
 	const isPanelOpen = useSelector(
 		(state: RootState) => state.panelState.isPanelOpen,
 	);
@@ -28,21 +30,23 @@ export default function Panel() {
 	return (
 		<nav
 			// bug - fix overflow-y-auto - cross size is facing a bug
-			className="fixed left-0 top-[100px] z-2 flex h-[calc(100%-100px)] w-full flex-col border-b-0 border-l-0 border-r-2 border-t-0 border-solid border-[var(--color-accent)] bg-[var(--color-background)] p-5 pt-8 transition-all md:w-1/3 lg:relative lg:!left-0 lg:top-auto lg:h-full lg:max-w-fit max-w-full overflow-y-auto overflow-hidden"
+			className="z-2 border-(--color-accent) bg-(--color-background) fixed left-0 top-[100px] flex h-[calc(100%-100px)] w-full max-w-full flex-col overflow-hidden overflow-y-auto border-b-0 border-l-0 border-r-2 border-t-0 border-solid p-5 pt-8 transition-all md:w-1/3 lg:relative lg:left-0! lg:top-auto lg:h-full lg:max-w-fit"
 			style={{
 				left: isPanelOpen ? "0px" : "-100%",
 			}}
 		>
 			<div
-				className="hidden items-center pb-4  transition-all lg:flex"
-				style={{
-					// paddingRight: isPanelOpen ? "12px" : "0",
-					// paddingLeft: isPanelOpen ? "12px" : "0",
-				}}
+				className="hidden items-center pb-4 transition-all lg:flex"
+				style={
+					{
+						// paddingRight: isPanelOpen ? "12px" : "0",
+						// paddingLeft: isPanelOpen ? "12px" : "0",
+					}
+				}
 			>
 				<div className="flex h-[50px]">
 					<MdVideogameAsset
-						className="bg-gradient-to-r text-[var(--Purple)]"
+						className="bg-linear-to-r text-(--color-primary)"
 						style={{
 							marginRight: isPanelOpen ? "16px" : "0",
 							fontSize: isPanelOpen ? "3rem" : "0",
@@ -90,7 +94,7 @@ export default function Panel() {
 			>
 				Feeds
 			</Typography>
-			<div className="w-full border-b-[1px] border-slate-600 pb-10">
+			<div className="w-full border-b border-slate-600 pb-10">
 				<NavLink
 					href="/"
 					icon={
@@ -117,19 +121,23 @@ export default function Panel() {
 					label="Games"
 					isPanelOpen={isPanelOpen}
 				/>
-				<NavLink
-					href="/install"
-					icon={
-						<FaDownload
-							className="min-h-8 min-w-8 transition-[margin] duration-150"
-							style={{ marginRight: isPanelOpen ? "16px" : "0" }}
-						/>
-					}
-					label="Install"
-					isPanelOpen={isPanelOpen}
-				/>
+				{!isAppInstalled && (
+					<NavLink
+						href="/install"
+						icon={
+							<FaDownload
+								className="min-h-8 min-w-8 transition-[margin] duration-150"
+								style={{
+									marginRight: isPanelOpen ? "16px" : "0",
+								}}
+							/>
+						}
+						label="Install"
+						isPanelOpen={isPanelOpen}
+					/>
+				)}
 			</div>
-			<hr className="h-[1px] w-full bg-slate-600" />
+			<hr className="h-px w-full bg-slate-600" />
 			<div className="pb-10 pt-10">
 				<Typography
 					sx={{
@@ -169,7 +177,7 @@ function NavLink({ href, icon, label, isPanelOpen }: NavLinkProps) {
 	return (
 		<Link
 			href={href}
-			className="mb-1 mt-1 flex w-full items-center justify-center rounded-md p-3 text-slate-600 transition-all hover:bg-[var(--Purple)] hover:text-white"
+			className="hover:bg-(--color-primary) mb-1 mt-1 flex w-full items-center justify-center rounded-md p-3 text-slate-600 transition-all hover:text-white"
 		>
 			{icon}
 			<Typography
