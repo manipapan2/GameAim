@@ -30,6 +30,8 @@ async function getGame(params: any) {
 export default async function GamesPage(params: any) {
 	const game: GameType = await getGame(params);
 
+	console.log(game)
+
 	return (
 		<>
 			<Head>

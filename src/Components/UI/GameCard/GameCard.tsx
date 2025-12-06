@@ -2,23 +2,21 @@
 import "@/styles/globals.css";
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { IoIosStar } from "react-icons/io";
 import Link from "next/link";
 
 interface GameCardProps {
-	Id: string;
 	Name: string;
 	Rate: number;
 	Price: number;
-	ImageSrc: string;
+	image: StaticImageData;
 	Category: string;
 }
 
 export default function GameCard({
-	Id,
 	Name,
-	ImageSrc,
+	image,
 	Rate,
 	Price,
 	Category,
@@ -30,12 +28,12 @@ export default function GameCard({
 		>
 			<div className="relative aspect-video w-full">
 				<Image
-					src={ImageSrc}
+					src={image.src}
 					alt={`${Name} Image`}
 					className="h-full w-full rounded-tl-lg rounded-tr-lg object-cover"
-					loading="lazy"
-					width={1600}
-					height={900}
+					width={image.width}
+					height={image.height}
+					blurDataURL={image.blurDataURL}
 				/>
 			</div>
 

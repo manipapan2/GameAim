@@ -13,10 +13,11 @@ const CarouselSlide = ({ image, name, rate }: CarouselSlideProps) => {
 			className={`group relative ml-3 mr-3 h-96 min-w-[250px] cursor-pointer rounded-md bg-(--color-accent) first:ml-0 first:mr-3 last:ml-3 last:mr-0`}
 		>
 			<Image
-				src={image}
+				src={image.src}
 				alt={`${name} image`}
-				width={1600}
-				height={900}
+				width={image.width}
+				height={image.height}
+				blurDataURL={image.blurDataURL}
 				className="h-full w-full select-none rounded-md object-cover hover:cursor-pointer"
 			/>
 

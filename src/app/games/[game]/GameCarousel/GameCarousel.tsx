@@ -23,14 +23,22 @@ const GameCarousel = ({
 				<div className="flex h-full w-full">
 					{Array.isArray(images) && images.length > 0
 						? images.map(
-							// Optimize : use unique key
+								// Optimize : use unique key
 								(image: StaticImageData, index: number) => (
 									<div
 										onClick={() => onClickEach(index)}
 										key={`game crousel key: ${index}`}
 										className="ml-2 mr-2 aspect-video w-[30%] min-w-52 cursor-pointer rounded-md first:ml-0 last:mr-0"
 									>
-										<Image src={image} alt="" className="w-full h-full rounded-md" loading="lazy" />
+										<Image
+											src={image.src}
+											alt=""
+											width={image.width}
+											height={image.height}
+											blurDataURL={image.blurDataURL}
+											className="h-full w-full rounded-md"
+											loading="lazy"
+										/>
 									</div>
 								),
 							)
@@ -39,7 +47,7 @@ const GameCarousel = ({
 									key={number}
 									className="ml-2 mr-2 aspect-video w-[30%] min-w-52 animate-pulse cursor-pointer rounded-md bg-slate-600 first:ml-0 last:mr-0"
 								>
-									<Image src="#" alt="" loading="lazy"/>
+									<Image src="#" alt="" loading="lazy" />
 								</div>
 							))}
 				</div>

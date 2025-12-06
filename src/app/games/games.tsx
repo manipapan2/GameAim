@@ -125,7 +125,9 @@ export default function Games({
 	}, [rate]);
 
 	useEffect(() => {
-		const categoryParam = searchParams.get("category");
+		let categoryParam = searchParams.get("category");
+		categoryParam = categoryParam == null ? "" : categoryParam;
+
 
 		if (category != undefined && category != categoryParam) {
 			const nextSearchParams = new URLSearchParams(
@@ -147,35 +149,37 @@ export default function Games({
 					router.replace(`${pathname}?${nextSearchParams}`);
 				}
 			}
-
 			mutateGames();
 		}
 	}, [category]);
 
 	useEffect(() => {
-		const nameParam = searchParams.get("name");
+		let searchNameParam = searchParams.get("search_name");
+		searchNameParam = searchNameParam == null ? "" : searchNameParam;
 
-		if (name != undefined && name != nameParam) {
+
+		if (searchName != undefined && searchName != searchNameParam) {
+			console.log('searchName:', searchName)
+			console.log('searchNameParam:', searchNameParam)
 			const nextSearchParams = new URLSearchParams(
 				searchParams.toString(),
 			);
 
-			if (nameParam) {
-				if (name == "") {
-					nextSearchParams.delete("name");
+			if (searchNameParam) {
+				if (searchName == "") {
+					nextSearchParams.delete("search_name");
 				} else {
-					nextSearchParams.delete("name");
-					nextSearchParams.append("name", name);
+					nextSearchParams.delete("search_name");
+					nextSearchParams.append("search_name", searchName);
 				}
 
 				router.replace(`${pathname}?${nextSearchParams}`);
 			} else {
-				if (name != "") {
-					nextSearchParams.append("name", name);
+				if (searchName != "") {
+					nextSearchParams.append("search_name", searchName);
 					router.replace(`${pathname}?${nextSearchParams}`);
 				}
 			}
-
 			mutateGames();
 		}
 	}, [searchName]);
@@ -194,6 +198,11 @@ export default function Games({
 			});
 		}
 	}, [categories]);
+
+	useEffect(() => {
+	  console.log(data)
+	}, [data])
+	
 	
 
 	return (
@@ -266,9 +275,8 @@ export default function Games({
 					{data.map((game: GameType) => (
 						<GameCard
 							key={game.id}
-							Id={game.id}
 							Name={game.name}
-							ImageSrc={`/assets/${game.id}.png`}
+							image={game.image}
 							Rate={game.rate}
 							Price={game.price}
 							Category={game.category}
@@ -283,9 +291,8 @@ export default function Games({
 					{games.map((game: GameType) => (
 						<GameCard
 							key={game.id}
-							Id={game.id}
 							Name={game.name}
-							ImageSrc={`/assets/${game.id}.png`}
+							image={game.image}
 							Rate={game.rate}
 							Price={game.price}
 							Category={game.category}

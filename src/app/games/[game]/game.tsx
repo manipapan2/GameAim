@@ -37,6 +37,8 @@ const Game = ({ game }: { game: GameType }) => {
 		GtaVImage,
 	];
 
+	console.log('game:', game)
+
 	const notify_add_success = () =>
 		toast.success(`${game.name} successfuly added to cart!`, {
 			style: {
@@ -138,13 +140,12 @@ const Game = ({ game }: { game: GameType }) => {
 			<div className="pointer-events-none! aspect-16/8 md:aspect-16/4 relative w-full overflow-hidden rounded-t-md">
 				{/* For optimization change scale to background size */}
 				<Image
-					src={`/assets/${game.id}.png`}
+					src={game.image.src}
 					className="max-h-full w-full select-none rounded-t-md object-cover"
 					alt="test"
-					width={1600}
-					height={900}
-					quality={100}
-					// cover
+					width={game.image.width}
+					height={game.image.height}
+					blurDataURL={game.image.blurDataURL}
 					style={{
 						transform: `scale(${imageScale})`,
 						opacity: `${1 - scrollPercentage / 100}`,

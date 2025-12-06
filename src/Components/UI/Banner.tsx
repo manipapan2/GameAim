@@ -20,9 +20,9 @@ export default function Banner() {
 
 					}}
 				>
-					Find <span className="text-[var(--Purple)]">Whatever</span>{" "}
+					Find <span className="text-(--color-primary)">Whatever</span>{" "}
 					suits <br /> you best &{" "}
-					<span className="text-[var(--Purple)]">Play</span>
+					<span className="text-(--color-primary)">Play</span>
 				</Typography>
 				{/* <Typography sx={{
 					marginBottom: "1rem",

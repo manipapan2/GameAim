@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type GameCategoryType =
 	| "Hero Shooter"
 	| "First-Person Shooter"
@@ -12,6 +14,7 @@ export type GameType = {
 	price: number;
 	category: GameCategoryType;
 	description: string;
+	image: StaticImageData;
 	is_added_to_cart?: boolean;
 };
 

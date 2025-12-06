@@ -2,11 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GameType, GameCategoryType, categories } from "@/Types/games";
 import { games } from "../(db)/games";
 import { user } from "../(db)/user";
-
-
-const GetImageRawData = () => {
-	return 'asdasdasd'
-}
+import MinecraftImage from '../../../../Public/assets/123523.png'
 
 export async function GET(req: NextRequest) {
 	const searchParams = req.nextUrl.searchParams;
@@ -108,6 +104,7 @@ export async function GET(req: NextRequest) {
 
 		result = filteredGames;
 	}
+
 
 	return NextResponse.json(result, { status: 200 });
 }
