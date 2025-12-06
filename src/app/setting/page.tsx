@@ -6,13 +6,15 @@ import { ReactNode, useEffect, useState } from "react";
 import { IoMdNotifications } from "react-icons/io";
 import { BsCameraVideoFill } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
+import toast, { Toaster } from "react-hot-toast";
 
 type PermissionType = "default" | "granted" | "denied" | null | "not supported";
+
+const notify = (text: string) => toast.error(text);
 
 const Setting: React.FC = () => {
 	const [notificationState, setNotificationState] =
 		useState<PermissionType>();
-	const [geolocationState, setGeolocationState] = useState<PermissionType>();
 	const [cameraState, setCameraState] = useState<PermissionType>();
 
 	const request_notification_permission = () => {
@@ -20,31 +22,16 @@ const Setting: React.FC = () => {
 			return;
 		}
 		if (Notification.permission === "default") {
-			Notification.requestPermission().then(() =>
-				setNotificationState("granted"),
-			);
+			Notification.requestPermission().then((res) => {
+				if (res == "granted") setNotificationState("granted");
+				else notify("Notification permission has been blocked");
+			});
 		} else if (Notification.permission === "denied") {
-			alert("denied");
+			notify("Notification permission has been blocked");
 		}
 	};
 
 	const request_camera_permission = () => {
-		// if (!("Notification" in window)) {
-		// 	return;
-		// }
-		// if (Notification.permission === "default") {
-		// 	Notification.requestPermission().then(() =>
-		// 		setNotificationState("granted"),
-		// 	);
-		// } else if (Notification.permission === "denied") {
-		// 	alert("denied");
-		// 	setNotificationState("denied");
-		// }
-
-		// if (!("camera" in window)) {
-		// 	return;
-		// }
-
 		navigator.permissions.query({ name: "camera" }).then((result) => {
 			if (result.state == "prompt") {
 				console.log("camea is default");
@@ -52,30 +39,11 @@ const Setting: React.FC = () => {
 					.getUserMedia({ video: true })
 					.then(() => setCameraState("granted"));
 			} else if (result.state == "denied") {
-				alert("denied");
+				notify("Camera permission has been blocked");
 			}
 		});
 	};
 
-	const request_geolocation_permission = () => {
-		if (!navigator.geolocation) {
-			return;
-		}
-		navigator.permissions.query({ name: "geolocation" }).then((result) => {
-			if (result.state == "prompt") {
-				// bug
-				navigator.geolocation.getCurrentPosition(
-					() => {
-						setGeolocationState("granted");
-						console.log("geo granted");
-					},
-					() => setGeolocationState("denied"),
-				);
-			} else if (result.state == "denied") {
-				alert("denied");
-			}
-		});
-	};
 
 	useEffect(() => {
 		if ("Notification" in window) {
@@ -90,20 +58,6 @@ const Setting: React.FC = () => {
 			setNotificationState("not supported");
 		}
 
-		// bug
-		// if ("geolocation" in navigator) {
-		navigator.permissions.query({ name: "geolocation" }).then((result) => {
-			if (result.state == "prompt") {
-				setGeolocationState("default");
-			} else if (result.state == "granted") {
-				setGeolocationState("granted");
-			} else {
-				setGeolocationState("default");
-			}
-		});
-		// } else {
-		// 	setGeolocationState("not supported");
-		// }
 
 		navigator.permissions.query({ name: "camera" }).then((result) => {
 			if (result.state == "prompt") {
@@ -120,7 +74,8 @@ const Setting: React.FC = () => {
 		<div>
 			<Title Text="Permisions" />
 			{/* optimize  - make a loading for buttons or rows */}
-			<div className="rounded-sm bg-[var(--color-accent)]">
+			<div className="bg-(--color-accent) rounded-sm">
+				<Toaster />
 				{notificationState != "not supported" && (
 					<SettingOption
 						IsActive={notificationState == "granted"}
@@ -135,15 +90,6 @@ const Setting: React.FC = () => {
 						Icon={<BsCameraVideoFill size={30} />}
 						Text={"Camera"}
 						onClick={() => request_camera_permission()}
-					/>
-				)}
-
-				{geolocationState != "not supported" && (
-					<SettingOption
-						IsActive={geolocationState == "granted"}
-						Icon={<FaLocationDot size={30} />}
-						Text={"Location"}
-						onClick={() => request_geolocation_permission()}
 					/>
 				)}
 			</div>
@@ -165,7 +111,7 @@ export const SettingOption = ({
 	onClick,
 }: SettingOptionProps) => {
 	return (
-		<div className="flex min-h-[6.5rem] flex-col items-center justify-between border-[1px] border-l-0 border-r-0 border-t-0 border-solid border-slate-500 p-3 pb-7 pt-7 last:border-b-0 md:flex-row">
+		<div className="flex min-h-26 flex-col items-center justify-between border border-l-0 border-r-0 border-t-0 border-solid border-slate-500 p-3 pb-7 pt-7 last:border-b-0 md:flex-row">
 			<div className="flex w-full items-center justify-start md:w-auto md:justify-normal">
 				<i
 					className="mr-3"
