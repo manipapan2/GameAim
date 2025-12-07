@@ -17,6 +17,7 @@ import OverwatchImage from "../../../../Public/assets/2841233.png";
 import MinecraftImage from "../../../../Public/assets/577753.png";
 import HaloImage from "../../../../Public/assets/6464542.png";
 import GtaVImage from "../../../../Public/assets/73453454.png";
+import { closePanel } from "@/Hooks/Redux/panelSlice";
 
 const Game = ({ game }: { game: GameType }) => {
 	const [scrollPercentage, setScrollPercentage] = useState<number>(0);
@@ -37,7 +38,10 @@ const Game = ({ game }: { game: GameType }) => {
 		GtaVImage,
 	];
 
-	console.log('game:', game)
+	// useEffect(() => {
+	//   if(isFixedGameCarouselOpen) dispatch(closePanel())
+	// }, [isFixedGameCarouselOpen])
+	
 
 	const notify_add_success = () =>
 		toast.success(`${game.name} successfuly added to cart!`, {
@@ -133,7 +137,7 @@ const Game = ({ game }: { game: GameType }) => {
 					images={mockImages}
 					selectedSlideIndex={selectedSlideIndex}
 					disabled={!isFixedGameCarouselOpen}
-					onClose={() => setIsFixedGameCarouselOpen((prev) => !prev)}
+					onClose={() => {setIsFixedGameCarouselOpen((prev) => !prev)}}
 				/>
 			</div>
 

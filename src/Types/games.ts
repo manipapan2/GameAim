@@ -5,7 +5,8 @@ export type GameCategoryType =
 	| "First-Person Shooter"
 	| "Action-Adventure"
 	| "Sandbox / Survival"
-	| "Action / Open World";
+	| "Action / Open World"
+	| "Social Deduction"
 
 export type GameType = {
 	id: string;

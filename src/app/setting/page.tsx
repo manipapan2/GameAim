@@ -37,13 +37,17 @@ const Setting: React.FC = () => {
 				console.log("camea is default");
 				navigator.mediaDevices
 					.getUserMedia({ video: true })
-					.then(() => setCameraState("granted"));
+					.then(() => setCameraState("granted"))
+					.catch((error) => {
+						if (error == "NotAllowedError: Permission denied") {
+							notify("Camera permission has been blocked");
+						}
+					});
 			} else if (result.state == "denied") {
 				notify("Camera permission has been blocked");
 			}
 		});
 	};
-
 
 	useEffect(() => {
 		if ("Notification" in window) {
@@ -57,7 +61,6 @@ const Setting: React.FC = () => {
 		} else {
 			setNotificationState("not supported");
 		}
-
 
 		navigator.permissions.query({ name: "camera" }).then((result) => {
 			if (result.state == "prompt") {
@@ -111,7 +114,7 @@ export const SettingOption = ({
 	onClick,
 }: SettingOptionProps) => {
 	return (
-		<div className="flex min-h-26 flex-col items-center justify-between border border-l-0 border-r-0 border-t-0 border-solid border-slate-500 p-3 pb-7 pt-7 last:border-b-0 md:flex-row">
+		<div className="min-h-26 flex flex-col items-center justify-between border border-l-0 border-r-0 border-t-0 border-solid border-slate-500 p-3 pb-7 pt-7 last:border-b-0 md:flex-row">
 			<div className="flex w-full items-center justify-start md:w-auto md:justify-normal">
 				<i
 					className="mr-3"

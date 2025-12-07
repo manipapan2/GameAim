@@ -4,6 +4,7 @@ import Overwatch2Image from "../../../../Public/assets/2841233.png";
 import AssasinsCreedImage from "../../../../Public/assets/6275643.png";
 import MinecraftImage from "../../../../Public/assets/577753.png";
 import GtaVImage from "../../../../Public/assets/73453454.png";
+import AmongUsImage from "../../../../Public/assets/8363534.avif";
 import HaloImage from "../../../../Public/assets/6464542.png";
 
 export const games: GameType[] = [
@@ -56,6 +57,16 @@ export const games: GameType[] = [
 		description:
 			"Play as three criminals in Los Santos in one of the most expansive open-world games ever.",
 		image: GtaVImage,
+	},
+	{
+		id: "8363534",
+		name: "Among Us",
+		rate: 3.4,
+		price: 4.99,
+		category: "Social Deduction",
+		description:
+			"Among Us is a cartoon-like strategy game that can be played on a variety of PC, mobile and console devices. Based on teamwork and betrayal, players are either 'crewmates' or 'imposters'. Crewmates try to accomplish their tasks, while imposters try to sabotage these missions and murder other crewmates.",
+		image: AmongUsImage,
 	},
 	{
 		id: "6464542",

@@ -29,13 +29,7 @@ const FixedGameCarousel = ({
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [Fade()]);
 
 	useEffect(() => {
-		console.log(selectedSlideIndex);
 		emblaApi?.scrollTo(selectedSlideIndex, true);
-		if (emblaApi) {
-			console.log("it exists");
-		} else {
-			console.log("it does not exist");
-		}
 	}, [selectedSlideIndex]);
 
 	// useEffect(() => {
