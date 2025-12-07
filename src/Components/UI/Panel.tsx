@@ -38,117 +38,62 @@ export default function Panel() {
 
 	return (
 		<nav
-			// bug - fix overflow-y-auto - cross size is facing a bug
-			className="z-2 border-(--color-accent) lg:z-1 bg-(--color-background) lg:left-0! fixed left-0 top-[100px] flex h-[calc(100%-100px)] w-full max-w-full flex-col overflow-hidden overflow-y-auto border-b-0 border-l-0 border-r-2 border-t-0 border-solid p-5 pt-8 transition-all md:w-1/3 lg:relative lg:top-auto lg:h-full lg:max-w-fit"
-			style={{
-				left: isPanelOpen ? "0px" : "-100%",
-			}}
+			className={`z-2 min-w-dvw backdrop-blur-[${isPanelOpen ? "10px" : "none"}] lg:pointer-events-auto pointer-events-${isPanelOpen ? "auto" : "none"} fixed top-[100px] h-[calc(100%-100px)] transition-all md:w-1/3 lg:relative lg:top-0 lg:h-full lg:w-fit lg:min-w-fit lg:max-w-fit`}
 		>
-
+			<span className="w-full h-full absolute" onClick={() => dispatch(closePanel())}></span>
 			<div
-				className="hidden items-center pb-4 transition-all lg:flex"
-				style={
-					{
-						// paddingRight: isPanelOpen ? "12px" : "0",
-						// paddingLeft: isPanelOpen ? "12px" : "0",
-					}
-				}
-			>
-				<div className="flex h-[50px]">
-					<MdVideogameAsset
-						className="bg-linear-to-r text-(--color-primary)"
-						style={{
-							marginRight: isPanelOpen ? "16px" : "0",
-							fontSize: isPanelOpen ? "3rem" : "0",
-						}}
-					/>
-					<Typography
-						variant="h3"
-						sx={{
-							fontSize: isPanelOpen ? "1.5rem" : "0",
-							display: "flex",
-							alignItems: "center",
-							color: "white",
-							transition: "font-size 150ms",
-						}}
-					>
-						GameAim
-					</Typography>
-				</div>
-				<IconButton
-					onClick={() => dispatch(togglePanel())}
-					sx={{
-						display: { xs: "hidden", lg: "flex" },
-						margin: "auto",
-						alignItems: "center",
-						justifyContent: "center",
-						padding: "0.5rem",
-					}}
-				>
-					{isPanelOpen ? (
-						<IoCloseSharp className="text-3xl text-white" />
-					) : (
-						<HiOutlineMenuAlt4 className="text-3xl text-white" />
-					)}
-				</IconButton>
-			</div>
-			<Typography
-				sx={{
-					marginBottom: "0.5rem",
-					width: "fit",
-					paddingLeft: "0.75rem",
-					fontSize: "0.75rem",
-					fontWeight: "bold",
-					color: "white",
+				className="border-(--color-accent) lg:z-1 bg-(--color-background) lg:left-0! relative left-0 flex h-full max-h-full min-h-full w-full max-w-full flex-col overflow-hidden overflow-y-auto border-b-0 border-l-0 border-r-2 border-t-0 border-none p-5 pt-8 transition-all md:w-1/3 md:border-solid lg:top-auto lg:w-full"
+				style={{
+					left: isPanelOpen ? "0px" : "-100%",
 				}}
 			>
-				Feeds
-			</Typography>
-			<div className="w-full border-b border-slate-600 pb-10">
-				<NavLink
-					href="/"
-					icon={
-						<HomeIcon
-							className="min-h-8 min-w-8 transition-[margin] duration-150"
-							sx={{
-								marginRight: isPanelOpen ? "16px" : "0",
-							}}
-						/>
+				<div
+					className="hidden items-center pb-4 transition-all lg:flex"
+					style={
+						{
+							// paddingRight: isPanelOpen ? "12px" : "0",
+							// paddingLeft: isPanelOpen ? "12px" : "0",
+						}
 					}
-					label="Home"
-					isPanelOpen={isPanelOpen}
-				/>
-				<NavLink
-					href="/games"
-					icon={
+				>
+					<div className="flex h-[50px]">
 						<MdVideogameAsset
-							className="ml-auto min-h-8 min-w-8 transition-[margin] duration-150"
+							className="bg-linear-to-r text-(--color-primary)"
 							style={{
 								marginRight: isPanelOpen ? "16px" : "0",
+								fontSize: isPanelOpen ? "3rem" : "0",
 							}}
 						/>
-					}
-					label="Games"
-					isPanelOpen={isPanelOpen}
-				/>
-				{!isAppInstalled && (
-					<NavLink
-						href="/install"
-						icon={
-							<FaDownload
-								className="min-h-8 min-w-8 transition-[margin] duration-150"
-								style={{
-									marginRight: isPanelOpen ? "16px" : "0",
-								}}
-							/>
-						}
-						label="Install"
-						isPanelOpen={isPanelOpen}
-					/>
-				)}
-			</div>
-			<hr className="h-px w-full bg-slate-600" />
-			<div className="pb-10 pt-10">
+						<Typography
+							variant="h3"
+							sx={{
+								fontSize: isPanelOpen ? "1.5rem" : "0",
+								display: "flex",
+								alignItems: "center",
+								color: "white",
+								transition: "font-size 150ms",
+							}}
+						>
+							GameAim
+						</Typography>
+					</div>
+					<IconButton
+						onClick={() => dispatch(togglePanel())}
+						sx={{
+							display: { xs: "hidden", lg: "flex" },
+							margin: "auto",
+							alignItems: "center",
+							justifyContent: "center",
+							padding: "0.5rem",
+						}}
+					>
+						{isPanelOpen ? (
+							<IoCloseSharp className="text-3xl text-white" />
+						) : (
+							<HiOutlineMenuAlt4 className="text-3xl text-white" />
+						)}
+					</IconButton>
+				</div>
 				<Typography
 					sx={{
 						marginBottom: "0.5rem",
@@ -159,18 +104,76 @@ export default function Panel() {
 						color: "white",
 					}}
 				>
-					Other
+					Feeds
 				</Typography>
-				<NavLink
-					href="/setting"
-					icon={
-						<SettingsIcon
-							className={`${isPanelOpen ? "mr-4" : "mr-0"} min-h-8 min-w-8 transition-[margin]`}
+				<div className="w-full border-b border-slate-600 pb-10">
+					<NavLink
+						href="/"
+						icon={
+							<HomeIcon
+								className="min-h-8 min-w-8 transition-[margin] duration-150"
+								sx={{
+									marginRight: isPanelOpen ? "16px" : "0",
+								}}
+							/>
+						}
+						label="Home"
+						isPanelOpen={isPanelOpen}
+					/>
+					<NavLink
+						href="/games"
+						icon={
+							<MdVideogameAsset
+								className="ml-auto min-h-8 min-w-8 transition-[margin] duration-150"
+								style={{
+									marginRight: isPanelOpen ? "16px" : "0",
+								}}
+							/>
+						}
+						label="Games"
+						isPanelOpen={isPanelOpen}
+					/>
+					{!isAppInstalled && (
+						<NavLink
+							href="/install"
+							icon={
+								<FaDownload
+									className="min-h-8 min-w-8 transition-[margin] duration-150"
+									style={{
+										marginRight: isPanelOpen ? "16px" : "0",
+									}}
+								/>
+							}
+							label="Install"
+							isPanelOpen={isPanelOpen}
 						/>
-					}
-					label="Setting"
-					isPanelOpen={isPanelOpen}
-				/>
+					)}
+				</div>
+				<hr className="h-px w-full bg-slate-600" />
+				<div className="pb-10 pt-10">
+					<Typography
+						sx={{
+							marginBottom: "0.5rem",
+							width: "fit",
+							paddingLeft: "0.75rem",
+							fontSize: "0.75rem",
+							fontWeight: "bold",
+							color: "white",
+						}}
+					>
+						Other
+					</Typography>
+					<NavLink
+						href="/setting"
+						icon={
+							<SettingsIcon
+								className={`${isPanelOpen ? "mr-4" : "mr-0"} min-h-8 min-w-8 transition-[margin]`}
+							/>
+						}
+						label="Setting"
+						isPanelOpen={isPanelOpen}
+					/>
+				</div>
 			</div>
 		</nav>
 	);
