@@ -1,10 +1,6 @@
-// import GameCard from "@/Components/UI/GameCard/GameCard";
 import { Metadata } from "next";
-// import InputLabel from "@mui/material/InputLabel";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormControl from "@mui/material/FormControl";
-// import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Games from "./games";
+import { categories } from "@/Types/games";
 
 export const metadata: Metadata = {
 	title: "Games",
@@ -14,9 +10,14 @@ export const metadata: Metadata = {
 async function getGames(params: any) {
 	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 	let requestURL: string = `${BACKEND_URL}/api/games?`;
-	const searchName: string = params.searchParams?.searchName;
-	const category: string = params.searchParams?.category;
-	const rate: string = params.searchParams?.rate;
+
+	const serchParams = await params.searchParams;
+	const {
+		searchName,
+		category,
+		rate,
+	}: { searchName: string; category: string; rate: string } =
+		params.searchParams;
 
 	if (params.searchParams?.searchName) {
 		requestURL += `search_name=${searchName}&`;
@@ -38,10 +39,5 @@ async function getGames(params: any) {
 export default async function GamesPage(params: any) {
 	const games = await getGames(params);
 
-	return (
-		<Games
-			games={games}
-			categories={["Hero Shooter", "First-Person Shooter"]}
-		/>
-	);
+	return <Games games={games} categories={categories} />;
 }

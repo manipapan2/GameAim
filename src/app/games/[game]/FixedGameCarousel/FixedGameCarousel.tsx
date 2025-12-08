@@ -115,7 +115,7 @@ const FixedGameCarousel = ({
 					{/* Optimize : use unique key */}
 					{images.map((image: StaticImageData, index: number) => (
 						<div
-							key={`fixed image key: index`}
+							key={`fixed image key: ${index}`}
 							className="z-100 pointer-events-none! flex h-full min-w-full select-none items-center justify-center"
 						>
 							<Image

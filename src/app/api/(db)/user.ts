@@ -8,5 +8,6 @@ export const user: UserProps = {
     name: "manipapan2",
     money: 250,
     // ownedGamesIds: ["577753", "73453454"],
-    games_added: ["6464542"],
+    // games_added: ["6464542"],
+    games_added: [],
 };

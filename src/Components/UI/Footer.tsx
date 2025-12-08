@@ -110,7 +110,7 @@ export default function Footer() {
 					fontSize: "1rem",
 					color: "oklch(55.4% 0.046 257.417)"
 				}}>
-					All Rights Reserved
+					The colors and some structures are inspired from a template design that I could'nt find it's link :)
 				</Typography>
 			</div>
 		</footer>

@@ -159,8 +159,6 @@ export default function Games({
 
 
 		if (searchName != undefined && searchName != searchNameParam) {
-			console.log('searchName:', searchName)
-			console.log('searchNameParam:', searchNameParam)
 			const nextSearchParams = new URLSearchParams(
 				searchParams.toString(),
 			);
@@ -198,16 +196,10 @@ export default function Games({
 			});
 		}
 	}, [categories]);
-
-	useEffect(() => {
-	  console.log(data)
-	}, [data])
-	
 	
 
 	return (
 		<>
-		
 			<div className="relative z-50 flex w-full flex-col items-center justify-between p-1 md:flex-row">
 				<div className="relative m-2 h-10 w-full flex-1 md:max-w-80">
 					<i className="absolute left-3 top-[50%] translate-y-[-50%] text-(--color-primary)">

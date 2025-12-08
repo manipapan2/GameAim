@@ -2,9 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { GameType, GameCategoryType, categories } from "@/Types/games";
 import { games } from "../(db)/games";
 import { user } from "../(db)/user";
-import MinecraftImage from '../../../../Public/assets/123523.png'
+import { headers } from "next/headers";
 
-export async function GET(req: NextRequest) {
+export const dynamic = 'force-dynamic'
+
+export async function GET(req: NextRequest,) {
 	const searchParams = req.nextUrl.searchParams;
 	const name = searchParams.get("name");
 	const search_name = searchParams.get("search_name");
@@ -36,19 +38,21 @@ export async function GET(req: NextRequest) {
 		const nameStr = name as string;
 		const nameStrNormalized = nameStr.toLowerCase().replace(/\s+/g, "");
 
-		const foundGame = games.filter((game) =>
+		const foundGame: GameType = games.filter((game) =>
 			game.name
 				.toLowerCase()
 				.replace(/\s+/g, "")
 				.includes(nameStrNormalized),
 		)[0];
 
-		if(user.games_added.includes(foundGame.id)) {
-			foundGame.is_added_to_cart = true
-		}
-
 		if (foundGame) {
-			console.log(foundGame);
+			// Interesting: if the filter game changed the db changes too
+			if(user.games_added.includes(foundGame.id)) {
+				foundGame.is_added_to_cart = true
+			} else {
+				foundGame.is_added_to_cart = false
+			}
+			
 			return NextResponse.json(foundGame, { status: 200 });
 		} else {
 			return NextResponse.json(
@@ -124,6 +128,7 @@ export async function POST(req: NextRequest) {
 	const foundGame = games.filter((game) => game.id == game_id)[0].id
 
 	if (user.games_added.includes(foundGame)) {
+		console.log('game is already added')
 		return NextResponse.json(
 			{ message: "game is already added" },
 			{ status: 400 },
@@ -131,6 +136,8 @@ export async function POST(req: NextRequest) {
 	}
 
 	user.games_added.push(foundGame)
+
+	console.log('add:', user.games_added)
 
 	return NextResponse.json(
 		{ message: "game added to cart successfuly" },
@@ -161,8 +168,9 @@ export async function DELETE(req: NextRequest) {
 	}
 
 	const indexOfGame = user.games_added.indexOf(foundGame)
-	const spliced_games = user.games_added.slice(indexOfGame - 1, 1)
-	user.games_added = spliced_games;
+	console.log('index:', indexOfGame)
+	user.games_added.splice(indexOfGame, 1)
+	console.log('spliced:', user.games_added)
 
 	return NextResponse.json(
 		{ message: "game removed from the cart successfuly" },

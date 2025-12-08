@@ -17,6 +17,7 @@ import OverwatchImage from "../../../../Public/assets/2841233.png";
 import MinecraftImage from "../../../../Public/assets/577753.png";
 import HaloImage from "../../../../Public/assets/6464542.png";
 import GtaVImage from "../../../../Public/assets/73453454.png";
+import AmongUsImage from "../../../../Public/assets/8363534.avif";
 import { closePanel } from "@/Hooks/Redux/panelSlice";
 
 const Game = ({ game }: { game: GameType }) => {
@@ -41,7 +42,6 @@ const Game = ({ game }: { game: GameType }) => {
 	// useEffect(() => {
 	//   if(isFixedGameCarouselOpen) dispatch(closePanel())
 	// }, [isFixedGameCarouselOpen])
-	
 
 	const notify_add_success = () =>
 		toast.success(`${game.name} successfuly added to cart!`, {
@@ -73,14 +73,22 @@ const Game = ({ game }: { game: GameType }) => {
 
 	const { isPending: isAddGamePending, mutate: addGameToCart } = useMutation({
 		mutationFn: () => {
-			return axios.post(`${BACKEND_URL}/api/games`, { game_id: game.id });
+			return axios
+				.post(`${BACKEND_URL}/api/games`, { game_id: game.id })
+				.catch((err) => {
+					console.log(err)
+					throw new Error(err);
+				});
 		},
 		onSuccess: () => {
 			setIsGameAddedToCart(true);
 			dispatch(addGame(game.id));
 			notify_add_success();
 		},
-		onError: () => notify_error(),
+		onError: (error) => {
+			notify_error();
+			console.log("error:", error.message);
+		},
 	});
 
 	const { isPending: isRemoveGamePending, mutate: removeGameFromCart } =
@@ -137,7 +145,9 @@ const Game = ({ game }: { game: GameType }) => {
 					images={mockImages}
 					selectedSlideIndex={selectedSlideIndex}
 					disabled={!isFixedGameCarouselOpen}
-					onClose={() => {setIsFixedGameCarouselOpen((prev) => !prev)}}
+					onClose={() => {
+						setIsFixedGameCarouselOpen((prev) => !prev);
+					}}
 				/>
 			</div>
 
@@ -179,7 +189,7 @@ const Game = ({ game }: { game: GameType }) => {
 							className={`${isGameAddedToCart && "bg-red-600"}`}
 						>
 							{isGameAddedToCart
-								? "Game is added to cart"
+								? "Remove from cart"
 								: "Add to cart"}
 						</Button>
 					</div>

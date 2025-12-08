@@ -5,8 +5,7 @@ export type GameCategoryType =
 	| "First-Person Shooter"
 	| "Action-Adventure"
 	| "Sandbox / Survival"
-	| "Action / Open World"
-	| "Social Deduction"
+	| "Racing";
 
 export type GameType = {
 	id: string;
@@ -23,6 +22,11 @@ export interface GamesProps {
 	games: GameType[];
 }
 
-
-
-export const categories: GameCategoryType[] = ["Hero Shooter", "First-Person Shooter"];
+// Optimize: render categories from server
+export const categories: GameCategoryType[] = [
+	"Hero Shooter",
+	"First-Person Shooter",
+	"Action-Adventure",
+	"Sandbox / Survival",
+	"Racing",
+];

@@ -3,13 +3,13 @@ import { Typography } from "@mui/material";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import Button from "./Button";
 import Link from "next/link";
-import MinecraftImage from '../../../Public/assets/MinecraftLogo.png'
-import GtaImage from '../../../Public/assets/Gta.png'
-import PubgImage from '../../../Public/assets/PubgLogo.png'
+import MinecraftLogo from '../../../Public/assets/MinecraftLogo.png'
+import ForzaLogo from '../../../Public/assets/ForzaLogo.webp'
+import PubgLogo from '../../../Public/assets/PubgLogo.png'
 
 export default function Banner() {
 	return (
-		<div className="mb-10 flex w-full p-4 flex-col-reverse items-center justify-around rounded-md bg-[var(--CardColor)] lg:flex-row">
+		<div className="mb-10 flex w-full p-4 flex-col-reverse items-center justify-around rounded-md bg-(--CardColor) lg:flex-row">
 			<div className="p-6">
 				<Typography
 					variant="h4"
@@ -38,7 +38,7 @@ export default function Banner() {
 				</Link>
 			</div>
 			<ImageSlider
-				images={[MinecraftImage, GtaImage, PubgImage]}
+				images={[MinecraftLogo, PubgLogo, ForzaLogo]}
 			/>
 		</div>
 	);

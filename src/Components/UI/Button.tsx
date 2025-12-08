@@ -29,13 +29,13 @@ export default function Button({
 			onClick={onClick}
 			onChange={onChange ? (e) => onChange(e) : null}
 			disabled={disabled}
-			className={`flex justify-center text-slate-200 ${disabled || isLoading ? "!bg-slate-700 pointer-events-none cursor-auto" : "bg-[var(--color-primary)] cursor-pointer"} box-border min-h-12 w-full min-w-fit items-center rounded-sm p-2 ${className}`}
+			className={`flex justify-center text-slate-200 ${disabled || isLoading ? "bg-slate-700! pointer-events-none cursor-auto" : "bg-(--color-primary) cursor-pointer"} box-border min-h-12 w-full min-w-fit items-center rounded-sm p-2 ${className}`}
 		>
 			{isLoading ? (
-				<Spinner />
+				<Spinner size="small"/>
 			) : (
 				<>
-					<span className="mr-2 !text-2xl">{Icon}</span>
+					<span className="mr-2 text-2xl!">{Icon}</span>
 					<span>{children}</span>
 				</>
 			)}
