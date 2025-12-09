@@ -6,6 +6,7 @@ import { MdDownloadForOffline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { setIsAppInstalled } from "@/Hooks/Redux/appStateSlice";
 import { useRouter } from "next/navigation";
+import Spinner from "@/Components/UI/Spinner";
 
 export default function Download(): ReactElement {
 	const dispatch = useDispatch();
@@ -27,7 +28,9 @@ export default function Download(): ReactElement {
 	function disableInAppInstallPrompt() {
 		setInstallPrompt(null);
 	}
-	const [installPrompt, setInstallPrompt] = useState<any>(null);
+	const [installPrompt, setInstallPrompt] = useState<
+		undefined | null | any
+	>(undefined);
 	useEffect(() => {
 		const beforeInstall = (event: Event) => {
 			event.preventDefault();
@@ -45,20 +48,28 @@ export default function Download(): ReactElement {
 			{/* <div className=" w-2/3 lg:w-auto lg:h-2/3 bg-red-600 aspect-square m-auto mt-5 mb-5"></div> */}
 			{/* <Button className="mt-5" Icon={<FaDownload />}>Download</Button> */}
 
-			<div className="bg-(--color-accent) w-full rounded-sm p-4 flex flex-col md:flex-row">
-				<div>
-					<MdDownloadForOffline
-						size={90}
-						className="m-auto text-white"
-					/>
-				</div>
-				<Button
-					className="mt-5 md:mt-auto mb-auto md:h-14 md:max-w-64 md:ml-auto"
-					Icon={<FaDownload />}
-					onClick={installApp}
-				>
-					Install
-				</Button>
+			<div className="bg-(--color-accent) flex w-full flex-col rounded-sm p-4 md:flex-row">
+				{installPrompt == undefined ? (
+					<div className="w-full h-full p-4 flex justify-center items-center">
+						<Spinner/>
+					</div>
+				) : (
+					<>
+						<div>
+							<MdDownloadForOffline
+								size={90}
+								className="m-auto text-white"
+							/>
+						</div>
+						<Button
+							className="mb-auto mt-5 md:ml-auto md:mt-auto md:h-14 md:max-w-64"
+							Icon={<FaDownload />}
+							onClick={installApp}
+						>
+							Install
+						</Button>
+					</>
+				)}
 			</div>
 		</div>
 	);
