@@ -45,15 +45,15 @@ export default function Download(): ReactElement {
 			{/* <div className=" w-2/3 lg:w-auto lg:h-2/3 bg-red-600 aspect-square m-auto mt-5 mb-5"></div> */}
 			{/* <Button className="mt-5" Icon={<FaDownload />}>Download</Button> */}
 
-			<div className="bg-(--color-accent) w-full rounded-sm p-4">
-				<div className="">
+			<div className="bg-(--color-accent) w-full rounded-sm p-4 flex flex-col md:flex-row">
+				<div>
 					<MdDownloadForOffline
 						size={90}
 						className="m-auto text-white"
 					/>
 				</div>
 				<Button
-					className="mt-5"
+					className="mt-5 md:mt-auto mb-auto md:h-14 md:max-w-64 md:ml-auto"
 					Icon={<FaDownload />}
 					onClick={installApp}
 				>

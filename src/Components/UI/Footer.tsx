@@ -31,7 +31,9 @@ export default function Footer() {
 						<Tooltip
 							title={"Github"}
 						>
-							<SiGithub size={30} className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-(--color-primary)"/>
+							<a href="https://github.com/manipapan2/GameAim" className="cursor-pointer mr-2 transition-all text-slate-500 hover:text-(--color-primary)">
+								<SiGithub size={30}/>
+							</a>
 						</Tooltip>
 						<Tooltip
 							title={"Instagram"}
@@ -102,8 +104,8 @@ export default function Footer() {
 					</UnderlineLink>
 				</div>
 			</div>
-			<div className="mt-4 flex items-center">
-				<i className="mr-2 text-white">
+			<div className="mt-4 flex items-start">
+				<i className="mr-2 mt-1 text-white flex">
 					<FaRegCopyright size={17} />
 				</i>
 				<Typography variant="h6" sx={{

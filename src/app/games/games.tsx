@@ -28,7 +28,7 @@ export default function Games({
 		undefined
 	);
 
-	const [searchInputValue, setSearchInputValue] = useState<"" | string>()
+	const [searchInputValue, setSearchInputValue] = useState<"" | string>("")
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const pathname = usePathname();
