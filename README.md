@@ -7,7 +7,7 @@
 ## 💻 Built with
 
 *   NextJS
-*   Redux
-*   React-Query
-*   TailwindCSS
 *   MaterialUI
+*   TailwindCSS
+*   React-Query
+*   Redux-Toolkit
