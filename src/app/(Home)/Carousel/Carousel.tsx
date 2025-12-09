@@ -59,7 +59,7 @@ const Carousel = () => {
 						// className={'embla__dot'.concat(
 						//   index === selectedIndex ? ' embla__dot--selected' : ''
 						// )}
-						className={`border-[2px] m-2 w-4 aspect-square rounded-full border-solid border-slate-700 ${index === selectedIndex ? "bg-[var(--color-primary)] border-[var(--color-primary)]" : ""} transition-all`}
+						className={`border-2px cursor-pointer m-2 w-4 aspect-square rounded-full border-solid border-slate-700 ${index === selectedIndex ? "bg-(--color-primary) border-(--color-primary)" : ""} transition-all`}
 					/>
 				))}
 			</div>
