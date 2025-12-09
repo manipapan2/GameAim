@@ -17,15 +17,15 @@ async function getGames(params: any) {
 		category,
 		rate,
 	}: { searchName: string; category: string; rate: string } =
-		params.searchParams;
+		serchParams
 
-	if (params.searchParams?.searchName) {
+	if (searchName) {
 		requestURL += `search_name=${searchName}&`;
 	}
-	if (params.searchParams?.category) {
+	if (category) {
 		requestURL += `category=${category}&`;
 	}
-	if (params.searchParams?.rate) {
+	if (rate) {
 		requestURL += `rate=${rate}`;
 	}
 

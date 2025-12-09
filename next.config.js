@@ -10,5 +10,6 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   
-  reactStrictMode: false
+  reactStrictMode: false,
+  removeConsole: true
 }
