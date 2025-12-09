@@ -16,7 +16,6 @@ export default function Download(): ReactElement {
 			return;
 		}
 		const result = await installPrompt.prompt();
-		console.log(`Install prompt was: ${result.outcome}`);
 		if (result.outcome == "accepted") {
 			dispatch(setIsAppInstalled(true));
 			router.push("/");
@@ -37,7 +36,8 @@ export default function Download(): ReactElement {
 
 		window.addEventListener("beforeinstallprompt", beforeInstall);
 
-		return window.removeEventListener("beforeinstallprompt", beforeInstall);
+		// Interesting: below code will ruin the install process
+		// return window.removeEventListener("beforeinstallprompt", beforeInstall);
 	}, []);
 
 	return (
