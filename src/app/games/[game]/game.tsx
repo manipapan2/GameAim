@@ -29,6 +29,7 @@ const Game = ({ game }: { game: GameType }) => {
 	const [isGameAddedToCart, setIsGameAddedToCart] = useState<boolean>(
 		game.is_added_to_cart ? true : false,
 	);
+	const [isPending, setIsPending] = useState<boolean>(false);
 	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 	const dispatch = useDispatch();
 	const mockImages: StaticImageData[] = [
@@ -71,40 +72,25 @@ const Game = ({ game }: { game: GameType }) => {
 			},
 		});
 
-	const { isPending: isAddGamePending, mutate: addGameToCart } = useMutation({
-		mutationFn: () => {
-			return axios
-				.post(`${BACKEND_URL}/api/games`, { game_id: game.id })
-				.catch((err) => {
-					console.log(err)
-					throw new Error(err);
-				});
-		},
-		onSuccess: () => {
+	const addGameToCart = () => {
+		setIsPending(true);
+		setTimeout(() => {
 			setIsGameAddedToCart(true);
 			dispatch(addGame(game.id));
 			notify_add_success();
-		},
-		onError: (error) => {
-			notify_error();
-			console.log("error:", error.message);
-		},
-	});
+			setIsPending(false);
+		}, 1300);
+	};
+	const removeGameFromCart = () => {
+		setIsPending(true);
 
-	const { isPending: isRemoveGamePending, mutate: removeGameFromCart } =
-		useMutation({
-			mutationFn: () => {
-				return axios.delete(`${BACKEND_URL}/api/games`, {
-					data: { game_id: game.id },
-				});
-			},
-			onSuccess: () => {
-				setIsGameAddedToCart(false);
-				dispatch(removeGame(game.id));
-				notify_remove_success();
-			},
-			onError: () => notify_error(),
-		});
+		setTimeout(() => {
+			setIsGameAddedToCart(false);
+			dispatch(removeGame(game.id));
+			notify_remove_success();
+			setIsPending(false);
+		}, 1300);
+	};
 
 	useEffect(() => {
 		const pageContainer = document.getElementById("single-game-page");
@@ -185,7 +171,7 @@ const Game = ({ game }: { game: GameType }) => {
 								if (isGameAddedToCart) removeGameFromCart();
 								else addGameToCart();
 							}}
-							isLoading={isAddGamePending || isRemoveGamePending}
+							isLoading={isPending}
 							className={`${isGameAddedToCart && "bg-red-600"}`}
 						>
 							{isGameAddedToCart
