@@ -1,12 +1,12 @@
 import type { GameType } from "@/Types/games";
-import ValorantImage from "../../../../Public/assets/412354.png";
-import Overwatch2Image from "../../../../Public/assets/2841233.png";
-import AssasinsCreedImage from "../../../../Public/assets/6275643.png";
-import MinecraftImage from "../../../../Public/assets/577753.png";
-// import GtaVImage from "../../../../Public/assets/73453454.png";
-import ForzaHorizonImage from "../../../../Public/assets/68395442.jpg";
-// import AmongUsImage from "../../../../Public/assets/8363534.avif";
-import HaloImage from "../../../../Public/assets/6464542.png";
+import ValorantImage from "../../../../public/assets/412354.png";
+import Overwatch2Image from "../../../../public/assets/2841233.png";
+import AssasinsCreedImage from "../../../../public/assets/6275643.png";
+import MinecraftImage from "../../../../public/assets/577753.png";
+// import GtaVImage from "../../../../public/assets/73453454.png";
+import ForzaHorizonImage from "../../../../public/assets/68395442.jpg";
+// import AmongUsImage from "../../../../public/assets/8363534.avif";
+import HaloImage from "../../../../public/assets/6464542.png";
 
 export const games: GameType[] = [
 	{

@@ -3,8 +3,8 @@ import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import CarouselSlide from "./CraouselSlide";
 import { DotButton, useDotButton } from "./CarouselDotButton";
-import HaloGameImage from '../../../../Public/assets/6464542.png'
-import AssasinCreedGameImage from '../../../../Public/assets/6275643.png'
+import HaloGameImage from '../../../../public/assets/6464542.png'
+import AssasinCreedGameImage from '../../../../public/assets/6275643.png'
 
 const Carousel = () => {
 	const [emblaRef, emblaApi] = useEmblaCarousel();

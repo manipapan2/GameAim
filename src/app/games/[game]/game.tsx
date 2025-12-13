@@ -12,12 +12,12 @@ import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addGame, removeGame } from "@/Hooks/Redux/cartSlice";
-import ValorantImage from "../../../../Public/assets/412354.png";
-import OverwatchImage from "../../../../Public/assets/2841233.png";
-import MinecraftImage from "../../../../Public/assets/577753.png";
-import HaloImage from "../../../../Public/assets/6464542.png";
-import GtaVImage from "../../../../Public/assets/73453454.png";
-import AmongUsImage from "../../../../Public/assets/8363534.avif";
+import ValorantImage from "../../../../public/assets/412354.png";
+import OverwatchImage from "../../../../public/assets/2841233.png";
+import MinecraftImage from "../../../../public/assets/577753.png";
+import HaloImage from "../../../../public/assets/6464542.png";
+import GtaVImage from "../../../../public/assets/73453454.png";
+import AmongUsImage from "../../../../public/assets/8363534.avif";
 import { closePanel } from "@/Hooks/Redux/panelSlice";
 
 const Game = ({ game }: { game: GameType }) => {
@@ -30,7 +30,7 @@ const Game = ({ game }: { game: GameType }) => {
 		game.is_added_to_cart ? true : false,
 	);
 	const [isPending, setIsPending] = useState<boolean>(false);
-	const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+	const BACKEND_URL = process.env.NEXT_pUBLIC_BACKEND_URL;
 	const dispatch = useDispatch();
 	const mockImages: StaticImageData[] = [
 		ValorantImage,

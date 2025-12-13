@@ -13,7 +13,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './mui-theme';
 
 const RobotoFont = localFont({
-	src: "../../Public/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf",
+	src: "../../public/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf",
 	variable: "--font-Roboto",
 	weight: "100 900",
 });

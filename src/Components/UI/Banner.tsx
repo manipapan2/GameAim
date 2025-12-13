@@ -3,9 +3,9 @@ import { Typography } from "@mui/material";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import Button from "./Button";
 import Link from "next/link";
-import MinecraftLogo from '../../../Public/assets/MinecraftLogo.png'
-import ForzaLogo from '../../../Public/assets/ForzaLogo.webp'
-import PubgLogo from '../../../Public/assets/PubgLogo.png'
+import MinecraftLogo from '../../../public/assets/MinecraftLogo.png'
+import ForzaLogo from '../../../public/assets/ForzaLogo.webp'
+import PubgLogo from '../../../public/assets/PubgLogo.png'
 
 export default function Banner() {
 	return (

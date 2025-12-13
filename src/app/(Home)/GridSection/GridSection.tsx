@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { ReactElement } from "react";
 import './GridSection.css'
-import ValorantImage from '../../../../Public/assets/412354.png'
-import MinecraftImage from '../../../../Public/assets/577753.png'
-import HaloImage from '../../../../Public/assets/6464542.png'
-import OverwatchImage from '../../../../Public/assets/2841233.png'
+import ValorantImage from '../../../../public/assets/412354.png'
+import MinecraftImage from '../../../../public/assets/577753.png'
+import HaloImage from '../../../../public/assets/6464542.png'
+import OverwatchImage from '../../../../public/assets/2841233.png'
 
 export default function GridSection(): ReactElement {
 	return (

@@ -7,7 +7,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
-import AvatarImage from '../../../Public/assets/Avatar.png'
+import AvatarImage from '../../../public/assets/Avatar.png'
 import Image from "next/image";
 
 export default function Header() {
