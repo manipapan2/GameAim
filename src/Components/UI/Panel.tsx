@@ -37,6 +37,8 @@ export default function Panel() {
 			dispatch(setIsAppInstalled(true));
 		}
 
+			setScreenWidth(window.innerWidth)
+
 		window.addEventListener('resize', () => {
 			setScreenWidth(window.innerWidth)
 		})
