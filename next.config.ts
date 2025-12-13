@@ -1,3 +1,5 @@
+import path from "path"
+
 const nextConfig = {
   typescript: {
     // !! WARN !!
@@ -8,10 +10,10 @@ const nextConfig = {
   },
    eslint: {
     ignoreDuringBuilds: true,
-  },
-  
+  }
+  ,
   reactStrictMode: false,
-  removeConsole: true
+  // removeConsole: true
 }
  
 export default nextConfig
