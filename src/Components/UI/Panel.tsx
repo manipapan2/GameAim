@@ -50,7 +50,7 @@ export default function Panel() {
 	  } else {
 		setNavPointerStyle('auto')
 	  }
-	}, [screenWidth])
+	}, [screenWidth, isPanelOpen])
 	
 
 
