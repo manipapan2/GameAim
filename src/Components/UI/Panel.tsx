@@ -36,12 +36,21 @@ export default function Panel() {
 		}
 	}, []);
 
+	const calcNavPointerEventStyle = () => {
+		if (typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches && !isPanelOpen){
+			return 'none'
+		}
+		return 'auto'
+  	}
+
 	return (
 		<nav
 			className="z-3 lg:z-1 min-w-dvw lg:pointer-events-auto fixed top-[100px] h-[calc(100%-100px)] transition-all md:w-1/3 lg:relative lg:top-0 lg:h-full lg:w-fit lg:min-w-fit lg:max-w-fit"
+			// Optimize: style
 			style={{
 				backdropFilter: isPanelOpen ? 'blur(10px)' : 'none',
-				pointerEvents: isPanelOpen ? "auto" : "none",
+				// pointerEvents: {xs: isPanelOpen ? "auto" : "none", lg: "auto"},
+				pointerEvents: calcNavPointerEventStyle()
 			}}
 		>
 			<span className="w-full h-full absolute" onClick={() => dispatch(closePanel())}></span>
