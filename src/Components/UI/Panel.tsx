@@ -38,7 +38,11 @@ export default function Panel() {
 
 	return (
 		<nav
-			className={`z-3 lg:z-1 min-w-dvw backdrop-blur-[${isPanelOpen ? "10px" : "none"}] lg:pointer-events-auto pointer-events-${isPanelOpen ? "auto" : "none"} fixed top-[100px] h-[calc(100%-100px)] transition-all md:w-1/3 lg:relative lg:top-0 lg:h-full lg:w-fit lg:min-w-fit lg:max-w-fit`}
+			className="z-3 lg:z-1 min-w-dvw lg:pointer-events-auto fixed top-[100px] h-[calc(100%-100px)] transition-all md:w-1/3 lg:relative lg:top-0 lg:h-full lg:w-fit lg:min-w-fit lg:max-w-fit"
+			style={{
+				backdropFilter: isPanelOpen ? 'blur(10px)' : 'none',
+				pointerEvents: isPanelOpen ? "auto" : "none",
+			}}
 		>
 			<span className="w-full h-full absolute" onClick={() => dispatch(closePanel())}></span>
 			<div
