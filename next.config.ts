@@ -13,7 +13,9 @@ const nextConfig = {
   }
   ,
   reactStrictMode: false,
-  // removeConsole: true
+  images: {
+    unoptimized: true,
+  },
 }
  
 export default nextConfig
