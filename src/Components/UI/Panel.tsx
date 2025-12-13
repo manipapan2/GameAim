@@ -6,7 +6,7 @@ import { MdVideogameAsset } from "react-icons/md";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/Hooks/Redux/store";
 import { togglePanel, closePanel } from "@/Hooks/Redux/panelSlice";
@@ -15,6 +15,8 @@ import { usePathname } from "next/navigation";
 import { setIsAppInstalled } from "@/Hooks/Redux/appStateSlice";
 
 export default function Panel() {
+	const [screenWidth, setScreenWidth] = useState<number | null>()
+	const [navPointerStyle, setNavPointerStyle] = useState<any>()
 	const isAppInstalled = useSelector(
 		(state: RootState) => state.appState.isAppInstalled,
 	);
@@ -34,14 +36,23 @@ export default function Panel() {
 		if (window.matchMedia("(display-mode: standalone)").matches) {
 			dispatch(setIsAppInstalled(true));
 		}
+
+		window.addEventListener('resize', () => {
+			setScreenWidth(window.innerWidth)
+		})
+
+		// Optimize: clear event
 	}, []);
 
-	const calcNavPointerEventStyle = () => {
-		if (typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches && !isPanelOpen){
-			return 'none'
-		}
-		return 'auto'
-  	}
+	useEffect(() => {
+	  if(screenWidth && screenWidth < 1024 && !isPanelOpen) {
+		setNavPointerStyle('none')
+	  } else {
+		setNavPointerStyle('auto')
+	  }
+	}, [screenWidth])
+	
+
 
 	return (
 		<nav
@@ -50,7 +61,7 @@ export default function Panel() {
 			style={{
 				backdropFilter: isPanelOpen ? 'blur(10px)' : 'none',
 				// pointerEvents: {xs: isPanelOpen ? "auto" : "none", lg: "auto"},
-				pointerEvents: calcNavPointerEventStyle()
+				pointerEvents: navPointerStyle
 			}}
 		>
 			<span className="w-full h-full absolute" onClick={() => dispatch(closePanel())}></span>
