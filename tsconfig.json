@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.ts",
-    "Public/sw.js",
+    "public/sw.js",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
