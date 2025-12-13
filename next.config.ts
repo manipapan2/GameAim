@@ -1,5 +1,3 @@
-import path from "path"
-
 const nextConfig = {
   typescript: {
     // !! WARN !!
@@ -12,7 +10,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   }
   ,
-  reactStrictMode: false,
+  reactStrictMode: true,
   // removeConsole: true
 }
  
