@@ -15,7 +15,7 @@ export default function Footer() {
 	return (
 		// <footer className="mt-4 rounded-lg bg-[var(--color-accent)] p-4">
 		<footer className="mt-4 rounded-lg p-4 z-0 relative">
-			<div className="flex justify-between flex-col md:flex-row md:items-start md:justify-between">
+			<div className="flex justify-between flex-col sm:flex-row md:items-start md:justify-between">
 				<div className="mt-4 md:mt-0 w-fit">
 					<Typography
 						variant="h4"
@@ -53,7 +53,7 @@ export default function Footer() {
 					</div>
 				</div>
 
-				<div className="mt-10 md:m-0">
+				<div className="mt-10 sm:mt-0">
 					<Typography
 						variant="h4"
 						sx={{
@@ -70,7 +70,7 @@ export default function Footer() {
 					</UnderlineLink>
 				</div>
 
-				<div className="mt-10 md:mt-0">
+				<div className="mt-10 sm:mt-0">
 					<Typography
 						variant="h4"
 						sx={{
@@ -104,7 +104,7 @@ export default function Footer() {
 					</UnderlineLink>
 				</div>
 			</div>
-			<div className="mt-4 flex items-start">
+			<div className="mt-7 flex items-start">
 				<i className="mr-2 mt-1 text-white flex">
 					<FaRegCopyright size={17} />
 				</i>
