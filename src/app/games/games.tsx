@@ -303,7 +303,7 @@ export const NoGameFound = (): ReactElement => {
 	return (
 		// fix style and height
 
-		<div className="flex w-full grow items-center justify-center text-white">
+		<div className="flex w-full grow items-center justify-center text-white mt-20 mb-20 md:m-0">
 			<Typography variant="h1" sx={{fontSize: "2rem"}}>No game found</Typography>
 		</div>
 	);
