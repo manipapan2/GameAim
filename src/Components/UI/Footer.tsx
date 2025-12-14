@@ -14,7 +14,7 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 export default function Footer() {
 	return (
 		// <footer className="mt-4 rounded-lg bg-[var(--color-accent)] p-4">
-		<footer className="mt-auto rounded-lg p-4 z-0 relative">
+		<footer className="mt-6 rounded-lg p-4 z-0 relative">
 			<div className="flex justify-between flex-col sm:flex-row md:items-start md:justify-between">
 				<div className="mt-4 md:mt-0 w-fit">
 					<Typography
